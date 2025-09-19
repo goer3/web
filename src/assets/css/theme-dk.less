@@ -1,0 +1,35 @@
+@import '@/assets/css/theme-var.less';
+
+// 基础样式
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*全局滚动条*/
+::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
+  min-height: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dk-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
