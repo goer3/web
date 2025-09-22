@@ -27,9 +27,137 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+// 箭头图标基础样式
+.dk-right-arrow {
+  left: calc(50% - 6px);
+}
+
+.dk-left-arrow {
+  left: calc(50% - 3px);
+}
+
+.dk-right-arrow,
+.dk-left-arrow,
+.dk-up-arrow,
+.dk-down-arrow {
+  position: absolute;
+  top: 50%;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 0;
+    transition:
+      background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    content: '';
+  }
+}
+
+.dk-right-arrow {
+  &::before {
+    transform: rotate(45deg) translateY(-3px);
+  }
+
+  &::after {
+    transform: rotate(-45deg) translateY(3px);
+  }
+}
+
+.dk-left-arrow {
+  &::before {
+    transform: rotate(-45deg) translateY(-3px);
+  }
+
+  &::after {
+    transform: rotate(45deg) translateY(3px);
+  }
+}
+
+.dk-up-arrow {
+  &::before {
+    transform: rotate(-45deg) translateX(3px);
+  }
+
+  &::after {
+    transform: rotate(45deg) translateX(-3px);
+  }
+}
+
+.dk-down-arrow {
+  &::before {
+    transform: rotate(45deg) translateX(3px);
+  }
+
+  &::after {
+    transform: rotate(-45deg) translateX(-3px);
+  }
+}
+
+// 加载动画
 .dk-loading {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+// 头部
+.dk-header {
+  box-shadow: @box-shadow-bottom;
+  // 固定在顶部
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+// 主体布局
+.dk-layout {
+  position: relative;
+  top: @header-height;
+}
+
+// 侧边栏
+.dk-sider {
+  box-shadow: @box-shadow-right;
+  height: calc(100vh - @header-height - @header-height);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  user-select: none;
+
+  .dk-menu {
+    padding: 10px 0;
+    letter-spacing: 1px;
+
+    .ant-menu-item-selected {
+      color: #ffffff;
+    }
+  }
+
+  // 侧边栏折叠时，选中项的父菜单背景颜色和文字颜色
+  .ant-menu-inline-collapsed .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: @color-black;
+    color: #ffffff;
+  }
+
+  // 侧边栏触发器
+  .ant-layout-sider-trigger {
+    box-shadow: @box-shadow-top;
+    box-shadow: @box-shadow-right;
+  }
+}
+
+
+// 内容主体
+.dk-content {
+  height: calc(100vh - @header-height);
+  overflow-y: scroll;
 }

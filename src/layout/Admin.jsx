@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined } from '@ant-design/icons';
+import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { Outlet } from 'react-router';
-const { Header, Content, Footer, Sider } = Layout;
+import { ArrowRightIcon, ArrowLeftIcon } from '@/components/icon';
+const { Header, Content, Sider } = Layout;
+import logo from '@/assets/images/logo/logo.png';
 
 function getItem(label, key, icon, children) {
   return {
@@ -14,29 +16,51 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [getItem('Tom', '3'), getItem('Bill', '4'), getItem('Alex', '5')]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />)
+  getItem('工作空间', '/dashboard', <DesktopOutlined />),
+  getItem('项目管理', '/project', <AppstoreAddOutlined />),
+  getItem('用户中心', '/user', <UsergroupAddOutlined />),
+  getItem('权限中心', '/permission', <AuditOutlined />, [
+    getItem('角色配置', '/permission/role'),
+    getItem('菜单配置', '/permission/menu'),
+    getItem('接口配置', '/permission/api')
+  ]),
+  getItem('系统管理', '/system', <SlidersOutlined />, [
+    getItem('系统设置', '/system/setting'),
+    getItem('操作日志', '/system/operation'),
+    getItem('版本信息', '/system/info')
+  ]),
 ];
 
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div>
-          <h1>ANT DESIGN</h1>
-        </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
-      <Layout>
-        <Header />
-        <Content>
-          <Outlet />
+    <Layout>
+      <Header className="dk-header">
+        <img src={logo} alt="logo" style={{ height: 50, padding: '13px 0' }} />
+      </Header>
+      <Layout className="dk-layout">
+        <Sider
+          className="dk-sider"
+          collapsible
+          collapsed={collapsed}
+          onCollapse={value => setCollapsed(value)}
+          width={220}
+          collapsedWidth={50}
+          trigger={collapsed ? <ArrowRightIcon /> : <ArrowLeftIcon />}
+        >
+          <Menu
+            className="dk-menu"
+            theme="light"
+            mode="inline"
+            defaultSelectedKeys={['/permission/role']}
+            defaultOpenKeys={['/permission']}
+            items={items}
+          />
+        </Sider>
+        <Content className="dk-content">
+          <div style={{ height: '10000px' }}>Content</div>
         </Content>
-        <Footer>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
       </Layout>
     </Layout>
   );
