@@ -54,7 +54,7 @@ createRoot(document.getElementById('root')).render(
           itemHoverBg: ColorLightBlue,
           itemHoverColor: ColorBlack,
           subMenuItemSelectedColor: ColorBlack,
-        }
+        },
       }
     }}
   >

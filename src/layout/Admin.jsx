@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined, ManOutlined } from '@ant-design/icons';
+import { Layout, Menu, Dropdown, Avatar, Badge } from 'antd';
 import { Outlet } from 'react-router';
 import { ArrowRightIcon, ArrowLeftIcon } from '@/components/icon';
 const { Header, Content, Sider } = Layout;
-import logo from '@/assets/images/logo/logo.png';
+import LogoImage from '@/assets/images/logo/logo.png';
+import AvatarImage from '@/assets/images/avatar/default.png';
 
 function getItem(label, key, icon, children) {
   return {
@@ -15,7 +16,8 @@ function getItem(label, key, icon, children) {
   };
 }
 
-const items = [
+// 菜单项
+const menuItems = [
   getItem('工作空间', '/dashboard', <DesktopOutlined />),
   getItem('项目管理', '/project', <AppstoreAddOutlined />),
   getItem('用户中心', '/user', <UsergroupAddOutlined />),
@@ -31,13 +33,35 @@ const items = [
   ])
 ];
 
+// 下拉用户信息
+const dropdownUserInfoPopupRender = () => {
+  return (
+    <div className="dk-dropdown-userinfo">
+      <div className="dk-dropdown-userinfo-account">
+        <Badge size="small" count={<ManOutlined style={{ backgroundColor: '#165dff' }} />} offset={[-10, 35]}>
+          <Avatar src={AvatarImage} size={40} />
+        </Badge>
+        <div className="dk-account-info">
+          <div className="dk-account-name">吴彦祖</div>
+          <div className="dk-account-item">超级管理员 | 手机：13888888888</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const AdminLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <Layout>
       <Header className="dk-header">
-        <img src={logo} alt="logo" className="dk-logo" />
+        <img src={LogoImage} alt="logo" className="dk-logo" />
+        <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender} open={true}>
+          <Badge size="small" count={<ManOutlined style={{ backgroundColor: '#165dff' }} />} offset={[-5, 22]}>
+            <Avatar className="dk-header-avatar" src={AvatarImage} size={26} />
+          </Badge>
+        </Dropdown>
       </Header>
       <Layout className="dk-layout">
         <Sider
@@ -55,7 +79,7 @@ const AdminLayout = () => {
             mode="inline"
             defaultSelectedKeys={['/permission/role']}
             defaultOpenKeys={['/permission']}
-            items={items}
+            items={menuItems}
           />
         </Sider>
         <Content className="dk-content">
