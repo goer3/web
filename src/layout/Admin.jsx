@@ -28,7 +28,7 @@ const items = [
     getItem('系统设置', '/system/setting'),
     getItem('操作日志', '/system/operation'),
     getItem('版本信息', '/system/info')
-  ]),
+  ])
 ];
 
 const AdminLayout = () => {

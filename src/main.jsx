@@ -8,6 +8,7 @@ import AdminRoute from '@/route.jsx';
 // 主体变量
 const ColorBlack = '#001529'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
+const ColorLightBlue = '#e3e8f0'; // 浅蓝色
 const HeaderHeight = '50px'; // 头部高度
 const SiderBackgroundColor = '#f7f8fa'; // 侧边栏背景颜色
 
@@ -46,10 +47,12 @@ createRoot(document.getElementById('root')).render(
           collapsedIconSize: 17,
           itemBg: SiderBackgroundColor,
           itemActiveBg: ColorBlack,
-          itemMarginBlock: 2,
+          itemMarginBlock: 0,
           itemMarginInline: 0,
           itemSelectedBg: ColorBlack,
           itemSelectedColor: ColorWhite,
+          itemHoverBg: ColorLightBlue,
+          itemHoverColor: ColorBlack,
           subMenuItemSelectedColor: ColorBlack,
         }
       }
