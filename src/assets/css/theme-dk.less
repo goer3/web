@@ -177,15 +177,18 @@ body {
 }
 
 .dk-dropdown-userinfo {
-  padding: 25px 15px;
+  padding: 5px;
   background-color: #ffffff;
-  border: 1px solid #0000001a;
+  border: 1px solid @color-gray;
   box-shadow: @box-shadow-bottom;
   width: 300px;
 
   .dk-dropdown-userinfo-account {
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: flex-start;
+    border: 1px solid @color-gray;
   }
 
   .dk-account-info {
@@ -203,6 +206,57 @@ body {
       color: rgba(0, 0, 0, 0.5);
       letter-spacing: 0.5px;
       line-height: 20px;
+
+      .ant-typography, .ant-typography p {
+        display: inline-block;
+        margin-bottom: 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.5px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .dk-dropdown-userinfo-btn-group {
+    background-color: @color-gray;
+
+    .dk-dropdown-userinfo-btn-left {
+      border: 1px solid @color-gray;
+      border-top: none;
+      border-right: none;
+      color: @color-black;
+    }
+
+    .dk-dropdown-userinfo-btn-right {
+      border: 1px solid @color-gray;
+      border-top: none;
+      border-left: none;
+      color: @color-black;
+    }
+
+    .dk-dropdown-userinfo-btn-center {
+      border: 1px solid @color-gray;
+      border-top: none;
+      color: @color-black;
+    }
+  }
+
+  .dk-dropdown-userinfo-statistic {
+    text-align: center;
+    padding: 15px 0;
+    border: 1px solid @color-gray;
+    border-top: none;
+    margin-bottom: 5px;
+
+    .ant-statistic .ant-statistic-title {
+      font-size: 13px;
+    }
+
+    .ant-statistic .ant-statistic-content {
+      font-size: 13px;
+      color: @color-blue;
+      font-weight: bold;
     }
   }
 }

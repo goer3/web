@@ -9,6 +9,7 @@ import AdminRoute from '@/route.jsx';
 const ColorBlack = '#001529'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
 const ColorLightBlue = '#e3e8f0'; // 浅蓝色
+const ColorBlue = '#0052D9'; // 蓝色
 const HeaderHeight = '50px'; // 头部高度
 const SiderBackgroundColor = '#f7f8fa'; // 侧边栏背景颜色
 
@@ -16,13 +17,19 @@ createRoot(document.getElementById('root')).render(
   <ConfigProvider
     locale={zhCN}
     theme={{
-      cssVar: true, 
+      cssVar: true,
       hashed: false,
       token: {
         fontFamily: 'MiSans, serif', // 文字字体
         fontSize: 14, // 默认字号
         borderRadius: 0, // 圆角
         fontColor: ColorBlack, // 文字颜色
+        colorPrimary: ColorBlack, // 主色调
+        colorLink: ColorBlue, // 链接颜色
+        colorLinkHover: ColorBlue, // 链接颜色悬停
+        marginXS: 5,
+        margin: 10,
+        marginLG: 15
       },
       components: {
         Layout: {
@@ -41,7 +48,7 @@ createRoot(document.getElementById('root')).render(
           triggerColor: ColorBlack,
           triggerHeight: HeaderHeight,
           zeroTriggerHeight: HeaderHeight,
-          zeroTriggerWidth: HeaderHeight,
+          zeroTriggerWidth: HeaderHeight
         },
         Menu: {
           collapsedIconSize: 17,
@@ -53,8 +60,18 @@ createRoot(document.getElementById('root')).render(
           itemSelectedColor: ColorWhite,
           itemHoverBg: ColorLightBlue,
           itemHoverColor: ColorBlack,
-          subMenuItemSelectedColor: ColorBlack,
+          subMenuItemSelectedColor: ColorBlack
         },
+        Button: {
+          colorPrimary: ColorBlack,
+          defaultShadow: 'none',
+          primaryShadow: 'none',
+          dangerShadow: 'none',
+          contentFontSize: 12,
+          contentLineHeight: '28px',
+          controlHeight: '28px',
+          defaultHoverColor: ColorBlue,
+        }
       }
     }}
   >
