@@ -37,7 +37,7 @@ const AdminLayout = () => {
   return (
     <Layout>
       <Header className="dk-header">
-        <img src={logo} alt="logo" style={{ height: 50, padding: '13px 0' }} />
+        <img src={logo} alt="logo" className="dk-logo" />
       </Header>
       <Layout className="dk-layout">
         <Sider

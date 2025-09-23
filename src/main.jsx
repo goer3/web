@@ -27,11 +27,11 @@ createRoot(document.getElementById('root')).render(
         Layout: {
           bodyBg: ColorWhite,
           footerBg: ColorWhite,
-          footerPadding: '0 20px',
+          footerPadding: '0 15px',
           headerBg: ColorWhite,
           headerColor: ColorBlack,
           headerHeight: HeaderHeight,
-          headerPadding: '0 20px',
+          headerPadding: '0 15px',
           lightSiderBg: SiderBackgroundColor,
           lightTriggerBg: ColorWhite,
           lightTriggerColor: ColorBlack,
