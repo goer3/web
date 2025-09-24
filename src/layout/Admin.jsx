@@ -86,7 +86,7 @@ const AdminLayout = () => {
     <Layout>
       <Header className="dk-header">
         <img src={LogoImage} alt="logo" className="dk-logo" />
-        <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender} open={true}>
+        <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender}>
           <Badge size="small" count={<ManOutlined style={{ backgroundColor: '#0052D9' }} />} offset={[-5, 22]}>
             <Avatar className="dk-header-avatar" src={AvatarImage} size={26} />
           </Badge>
