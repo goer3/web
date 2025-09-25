@@ -3,7 +3,7 @@ import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlin
 import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Divider, Statistic } from 'antd';
 import { Outlet } from 'react-router';
 import { ArrowRightIcon, ArrowLeftIcon } from '@/components/icon';
-import LogoImage from '@/assets/images/logo/logo.png';
+import LogoImage from '@/assets/images/logo/logo.svg';
 import AvatarImage from '@/assets/images/avatar/male_3.svg';
 
 const { Header, Content, Sider } = Layout;
