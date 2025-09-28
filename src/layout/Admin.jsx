@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined, ManOutlined, PhoneOutlined, UserOutlined, KeyOutlined, MailOutlined } from '@ant-design/icons';
 import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Divider, Statistic } from 'antd';
 import { Outlet } from 'react-router';
-import { ArrowRightIcon, ArrowLeftIcon } from '@/components/icon';
-import LogoImage from '@/assets/images/logo/logo.svg';
-import AvatarImage from '@/assets/images/avatar/male_3.svg';
+import { ArrowRightIcon, ArrowLeftIcon } from '@/components/Icon';
+import { LogoImage, DefaultAvatarImage } from '@/components/Image';
 
 const { Header, Content, Sider } = Layout;
 const { Paragraph } = Typography;
@@ -33,7 +32,7 @@ const dropdownUserInfoPopupRender = () => {
     <div className="dk-dropdown-userinfo">
       <div className="dk-dropdown-userinfo-account">
         <Badge size="small" count={<ManOutlined style={{ backgroundColor: '#0052D9' }} />} offset={[-10, 35]}>
-          <Avatar src={AvatarImage} size={40} />
+          <Avatar src={DefaultAvatarImage} size={40} />
         </Badge>
         <div className="dk-account-info">
           <div className="dk-account-name">吴彦祖</div>
@@ -88,7 +87,7 @@ const AdminLayout = () => {
         <img src={LogoImage} alt="logo" className="dk-logo" />
         <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender}>
           <Badge size="small" count={<ManOutlined style={{ backgroundColor: '#0052D9' }} />} offset={[-5, 22]}>
-            <Avatar className="dk-header-avatar" src={AvatarImage} size={26} />
+            <Avatar className="dk-header-avatar" src={DefaultAvatarImage} size={26} />
           </Badge>
         </Dropdown>
       </Header>
