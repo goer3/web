@@ -29,7 +29,8 @@ createRoot(document.getElementById('root')).render(
         colorLinkHover: ColorBlue, // 链接颜色悬停
         marginXS: 5,
         margin: 10,
-        marginLG: 15
+        marginLG: 15,
+        controlHeight: 28
       },
       components: {
         Layout: {
@@ -71,6 +72,15 @@ createRoot(document.getElementById('root')).render(
           contentLineHeight: '28px',
           controlHeight: '28px',
           defaultHoverColor: ColorBlue,
+        },
+        Input: {
+          activeShadow: 'none',
+          errorActiveShadow: 'none',
+          warningActiveShadow: 'none',
+          inputFontSize: 13,
+        },
+        Form: {
+          labelFontSize: 13,
         }
       }
     }}

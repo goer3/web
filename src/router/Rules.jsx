@@ -11,6 +11,10 @@ export const Rules = [
     element: <Navigate to="/dashboard" />
   },
   {
+    path: '/login',
+    element: RouterLazyLoad(React.lazy(() => import('@/page/login/Index.jsx')))
+  },
+  {
     path: '/',
     element: <AdminLayout />,
     children: [
@@ -20,7 +24,20 @@ export const Rules = [
       },
       {
         path: '/user',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/user/Index.jsx')))
+        children: [
+          {
+            path: '/user/list',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/user/list/Index.jsx')))
+          },
+          {
+            path: '/user/group',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/user/group/Index.jsx')))
+          }
+        ]
+      },
+      {
+        path: '/project',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/project/Index.jsx')))
       },
       {
         path: '/system',
@@ -43,6 +60,10 @@ export const Rules = [
           }
         ]
       },
+      {
+        path: '/information',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/information/Index.jsx')))
+      }
     ]
   },
   {

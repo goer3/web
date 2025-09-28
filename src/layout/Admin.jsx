@@ -23,7 +23,17 @@ const menuList = [
   {
     key: '/user',
     icon: <UsergroupAddOutlined />,
-    label: '用户中心'
+    label: '用户中心',
+    children: [
+      {
+        key: '/user/list',
+        label: '用户列表'
+      },
+      {
+        key: '/user/group',
+        label: '用户分组'
+      }
+    ]
   },
   {
     key: '/system',
@@ -44,9 +54,14 @@ const menuList = [
       },
       {
         key: '/system/setting',
-        label: '系统设置'
+        label: '系统配置'
       }
     ]
+  },
+  {
+    key: '/information',
+    icon: <SlidersOutlined />,
+    label: '版本信息'
   }
 ];
 
