@@ -1,8 +1,8 @@
-import { Navigate, useRoutes } from 'react-router';
 import React from 'react';
 import AdminLayout from '@/layout/Admin.jsx';
 import ErrorLayout from '@/layout/Error.jsx';
 import RouterLazyLoad from '@/router/LazyLoad.jsx';
+import { Navigate, useRoutes } from 'react-router';
 
 // 路由对象
 export const Rules = [
@@ -19,9 +19,26 @@ export const Rules = [
         element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Index.jsx')))
       },
       {
-        path: '/information',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/information/Index.jsx')))
-      }
+        path: '/system',
+        children: [
+          {
+            path: '/system/role',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/role/Index.jsx')))
+          },
+          {
+            path: '/system/menu',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/menu/Index.jsx')))
+          },
+          {
+            path: '/system/api',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/api/Index.jsx')))
+          },
+          {
+            path: '/system/setting',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/setting/Index.jsx')))
+          }
+        ]
+      },
     ]
   },
   {

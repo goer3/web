@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined, ManOutlined, PhoneOutlined, UserOutlined, KeyOutlined, MailOutlined } from '@ant-design/icons';
 import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Divider, Statistic } from 'antd';
-import { Outlet } from 'react-router';
+import { Outlet, useNavigate } from 'react-router';
 import { ArrowRightIcon, ArrowLeftIcon } from '@/components/Icon';
 import { LogoImage, DefaultAvatarImage } from '@/components/Image';
 
@@ -22,8 +22,12 @@ const menuItems = [
   getItem('工作空间', '/dashboard', <DesktopOutlined />),
   getItem('项目管理', '/project', <AppstoreAddOutlined />),
   getItem('用户中心', '/user', <UsergroupAddOutlined />),
-  getItem('权限中心', '/permission', <AuditOutlined />, [getItem('角色配置', '/permission/role'), getItem('菜单配置', '/permission/menu'), getItem('接口配置', '/permission/api')]),
-  getItem('系统管理', '/system', <SlidersOutlined />, [getItem('系统设置', '/system/setting'), getItem('操作日志', '/system/operation'), getItem('版本信息', '/system/info')])
+  getItem('权限中心', '/system', <AuditOutlined />, [
+    getItem('角色配置', '/system/role'), 
+    getItem('菜单配置', '/system/menu'), 
+    getItem('接口配置', '/system/api'),
+    getItem('系统设置', '/system/setting')
+  ]),
 ];
 
 // 下拉用户信息
@@ -79,7 +83,12 @@ const dropdownUserInfoPopupRender = () => {
 };
 
 const AdminLayout = () => {
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+
+  // 展开菜单和选中菜单，默认展开工作空间
+  const [openKeys, setOpenKeys] = useState(['/dashboard']);
+  const [selectedKeys, setSelectedKeys] = useState(['/dashboard']);
 
   return (
     <Layout>
@@ -101,10 +110,22 @@ const AdminLayout = () => {
           collapsedWidth={50}
           trigger={collapsed ? <ArrowRightIcon /> : <ArrowLeftIcon />}
         >
-          <Menu className="dk-menu" theme="light" mode="inline" defaultSelectedKeys={['/permission/role']} defaultOpenKeys={['/permission']} items={menuItems} />
+          <Menu 
+            className="dk-menu" 
+            theme="light" 
+            mode="inline" 
+            defaultSelectedKeys={selectedKeys} 
+            defaultOpenKeys={openKeys} 
+            items={menuItems}
+            onClick={({key}) => {
+              navigate(key);
+            }}
+          />
         </Sider>
         <Content className="dk-content">
-          <div style={{ height: '3000px' }}>Content</div>
+          <div style={{ height: '3000px' }}>
+            <Outlet />
+          </div>
         </Content>
       </Layout>
     </Layout>

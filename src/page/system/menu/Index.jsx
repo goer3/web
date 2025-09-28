@@ -3,18 +3,18 @@ import { TitleSuffix } from '@/components/Text';
 
 // 页面配置
 const config = {
-  title: '工作空间'
+  title: '菜单配置'
 };
 
-const DashboardIndex = () => {
+const MenuIndex = () => {
   return (
     <>
       <Helmet>
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
-      <h2>Dashboard</h2>
+      <h2>MenuIndex</h2>
     </>
   );
 };
 
-export default DashboardIndex;
+export default MenuIndex;
