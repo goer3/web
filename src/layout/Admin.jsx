@@ -1,34 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined, ManOutlined, PhoneOutlined, UserOutlined, KeyOutlined, MailOutlined } from '@ant-design/icons';
 import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Divider, Statistic } from 'antd';
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, useNavigate, useLocation } from 'react-router';
 import { ArrowRightIcon, ArrowLeftIcon } from '@/components/Icon';
 import { LogoImage, DefaultAvatarImage } from '@/components/Image';
 
 const { Header, Content, Sider } = Layout;
 const { Paragraph } = Typography;
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label
-  };
-}
-
 // 菜单项
-const menuItems = [
-  getItem('工作空间', '/dashboard', <DesktopOutlined />),
-  getItem('项目管理', '/project', <AppstoreAddOutlined />),
-  getItem('用户中心', '/user', <UsergroupAddOutlined />),
-  getItem('权限中心', '/system', <AuditOutlined />, [
-    getItem('角色配置', '/system/role'), 
-    getItem('菜单配置', '/system/menu'), 
-    getItem('接口配置', '/system/api'),
-    getItem('系统设置', '/system/setting')
-  ]),
+const menuList = [
+  {
+    key: '/dashboard',
+    icon: <DesktopOutlined />,
+    label: '工作空间'
+  },
+  {
+    key: '/project',
+    icon: <AppstoreAddOutlined />,
+    label: '项目管理'
+  },
+  {
+    key: '/user',
+    icon: <UsergroupAddOutlined />,
+    label: '用户中心'
+  },
+  {
+    key: '/system',
+    icon: <AuditOutlined />,
+    label: '权限中心',
+    children: [
+      {
+        key: '/system/role',
+        label: '角色配置'
+      },
+      {
+        key: '/system/menu',
+        label: '菜单配置'
+      },
+      {
+        key: '/system/api',
+        label: '接口配置'
+      },
+      {
+        key: '/system/setting',
+        label: '系统设置'
+      }
+    ]
+  }
 ];
+
+// 获取当前指定路径的所有父级菜单key列表，如果当前是顶级菜单，则返回当前菜单key列表
+const getParentMenuKeyList = (path) => {
+  // 如果路径为空或无效，返回空数组
+  if (!path) return [];
+  
+  // 将路径按 '/' 分割，过滤掉空字符串
+  const pathSegments = path.split('/').filter(segment => segment !== '');
+  
+  // 如果只有一个段，说明是顶级菜单，返回当前key列表
+  if (pathSegments.length === 1) return [path];
+  
+  // 构建父级key列表
+  const parentKeys = [];
+  let currentPath = '';
+  
+  // 遍历路径段，构建每个层级的完整路径
+  for (let i = 0; i < pathSegments.length; i++) {
+    currentPath += '/' + pathSegments[i];
+    parentKeys.push(currentPath);
+  }
+  
+  return parentKeys;
+};
 
 // 下拉用户信息
 const dropdownUserInfoPopupRender = () => {
@@ -84,11 +128,18 @@ const dropdownUserInfoPopupRender = () => {
 
 const AdminLayout = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
 
-  // 展开菜单和选中菜单，默认展开工作空间
-  const [openKeys, setOpenKeys] = useState(['/dashboard']);
-  const [selectedKeys, setSelectedKeys] = useState(['/dashboard']);
+  // 根据当前路径初始化菜单状态
+  const [openKeys, setOpenKeys] = useState(() => getParentMenuKeyList(pathname));
+  const [selectedKeys, setSelectedKeys] = useState(() => [pathname]);
+
+  // 如果 pathname 发生变化，则更新选中菜单和展开菜单
+  useEffect(() => {
+    setSelectedKeys([pathname]);
+    setOpenKeys(getParentMenuKeyList(pathname));
+  }, [pathname]);
 
   return (
     <Layout>
@@ -114,12 +165,11 @@ const AdminLayout = () => {
             className="dk-menu" 
             theme="light" 
             mode="inline" 
-            defaultSelectedKeys={selectedKeys} 
-            defaultOpenKeys={openKeys} 
-            items={menuItems}
-            onClick={({key}) => {
-              navigate(key);
-            }}
+            selectedKeys={selectedKeys} 
+            openKeys={openKeys} 
+            items={menuList}
+            onOpenChange={(keys) => setOpenKeys(keys)}
+            onClick={({key}) => navigate(key)}
           />
         </Sider>
         <Content className="dk-content">
@@ -131,4 +181,5 @@ const AdminLayout = () => {
     </Layout>
   );
 };
+
 export default AdminLayout;

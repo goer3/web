@@ -19,6 +19,10 @@ export const Rules = [
         element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Index.jsx')))
       },
       {
+        path: '/user',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/user/Index.jsx')))
+      },
+      {
         path: '/system',
         children: [
           {
