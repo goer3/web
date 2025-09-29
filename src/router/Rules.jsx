@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminLayout from '@/layout/Admin.jsx';
-import ErrorLayout from '@/layout/Error.jsx';
+import LoginAndErrorLayout from '@/layout/LoginAndError.jsx';
 import RouterLazyLoad from '@/router/LazyLoad.jsx';
 import { Navigate, useRoutes } from 'react-router';
 
@@ -9,10 +9,6 @@ export const Rules = [
   {
     path: '/',
     element: <Navigate to="/dashboard" />
-  },
-  {
-    path: '/login',
-    element: RouterLazyLoad(React.lazy(() => import('@/page/login/Index.jsx')))
   },
   {
     path: '/',
@@ -68,8 +64,12 @@ export const Rules = [
   },
   {
     path: '/',
-    element: <ErrorLayout />,
+    element: <LoginAndErrorLayout />,
     children: [
+      {
+        path: '/login',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/login/Index.jsx')))
+      },
       {
         path: '/403',
         element: RouterLazyLoad(React.lazy(() => import('@/page/error/403/Index.jsx')))
@@ -81,10 +81,6 @@ export const Rules = [
       {
         path: '/500',
         element: RouterLazyLoad(React.lazy(() => import('@/page/error/500/Index.jsx')))
-      },
-      {
-        path: '/502',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/error/502/Index.jsx')))
       }
     ]
   },

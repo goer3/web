@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DesktopOutlined, AppstoreAddOutlined, UsergroupAddOutlined, AuditOutlined, SlidersOutlined, ManOutlined, PhoneOutlined, UserOutlined, KeyOutlined, MailOutlined } from '@ant-design/icons';
-import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Divider, Statistic } from 'antd';
+import { Layout, Menu, Dropdown, Avatar, Badge, Typography, Button, Row, Col, Statistic } from 'antd';
 import { Outlet, useNavigate, useLocation } from 'react-router';
 import { ArrowRightIcon, ArrowLeftIcon } from '@/components/Icon';
 import { LogoImage, DefaultAvatarImage } from '@/components/Image';
