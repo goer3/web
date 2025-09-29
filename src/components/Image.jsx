@@ -5,7 +5,8 @@ import PermissionDeniedImage from '@/assets/images/error/403.svg';// 403页面�
 import PageNotFoundImage from '@/assets/images/error/404.svg';// 404页面图片
 import InternalServerErrorImage from '@/assets/images/error/500.svg';// 500页面图片
 import PageHeaderBackgroundImage from '@/assets/images/background/banner.png';// 页面头部图片
-import TagLeftIconImage from '@/assets/images/icon/tag-left-blue.png';// 左边蓝色图标
+import TagLeftBlueIconImage from '@/assets/images/icon/tag-left-blue.png';// 左边蓝色图标
+import TagLeftBlackIconImage from '@/assets/images/icon/tag-left-black.png';// 左边黑色图标
 
 export {
     LogoImage,
@@ -15,5 +16,6 @@ export {
     PermissionDeniedImage,
     InternalServerErrorImage,
     PageHeaderBackgroundImage,
-    TagLeftIconImage,
+    TagLeftBlueIconImage,
+    TagLeftBlackIconImage,
 };
