@@ -69,23 +69,23 @@ const menuList = [
 const getParentMenuKeyList = (path) => {
   // 如果路径为空或无效，返回空数组
   if (!path) return [];
-  
+
   // 将路径按 '/' 分割，过滤掉空字符串
   const pathSegments = path.split('/').filter(segment => segment !== '');
-  
+
   // 如果只有一个段，说明是顶级菜单，返回当前key列表
   if (pathSegments.length === 1) return [path];
-  
+
   // 构建父级key列表
   const parentKeys = [];
   let currentPath = '';
-  
+
   // 遍历路径段，构建每个层级的完整路径
   for (let i = 0; i < pathSegments.length; i++) {
     currentPath += '/' + pathSegments[i];
     parentKeys.push(currentPath);
   }
-  
+
   return parentKeys;
 };
 
@@ -176,21 +176,19 @@ const AdminLayout = () => {
           collapsedWidth={50}
           trigger={collapsed ? <ArrowRightIcon /> : <ArrowLeftIcon />}
         >
-          <Menu 
-            className="dk-menu" 
-            theme="light" 
-            mode="inline" 
-            selectedKeys={selectedKeys} 
-            openKeys={openKeys} 
+          <Menu
+            className="dk-menu"
+            theme="light"
+            mode="inline"
+            selectedKeys={selectedKeys}
+            openKeys={openKeys}
             items={menuList}
             onOpenChange={(keys) => setOpenKeys(keys)}
-            onClick={({key}) => navigate(key)}
+            onClick={({ key }) => navigate(key)}
           />
         </Sider>
         <Content className="dk-content">
-          <div style={{ height: '1200px' }}>
-            <Outlet />
-          </div>
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
