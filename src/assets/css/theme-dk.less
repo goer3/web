@@ -320,3 +320,45 @@ body {
   font-size: 10px;
   line-height: 12px;
 }
+
+.dk-page-header {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  padding: 20px 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+  .dk-page-header-title {
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+    line-height: 20px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: clamp(15px, 25vw, 15px);
+    background: linear-gradient(90deg, #00084d, #1d63ed);
+
+    img {
+      height: 12px;
+      margin-right: 5px;
+    }
+  }
+
+  .dk-page-header-body {
+    padding-left: 15px;
+    margin-top: 15px;
+    
+    p {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.6);
+      margin: 0;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.dk-page-content {
+  padding: 10px;
+}

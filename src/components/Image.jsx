@@ -4,6 +4,8 @@ import LoginBackgroundImage from '@/assets/images/background/bg.png';// 登录�
 import PermissionDeniedImage from '@/assets/images/error/403.svg';// 403页面图片
 import PageNotFoundImage from '@/assets/images/error/404.svg';// 404页面图片
 import InternalServerErrorImage from '@/assets/images/error/500.svg';// 500页面图片
+import PageHeaderBackgroundImage from '@/assets/images/background/banner.png';// 页面头部图片
+import TagLeftIconImage from '@/assets/images/icon/tag-left-blue.png';// 左边蓝色图标
 
 export {
     LogoImage,
@@ -12,4 +14,6 @@ export {
     PageNotFoundImage,
     PermissionDeniedImage,
     InternalServerErrorImage,
+    PageHeaderBackgroundImage,
+    TagLeftIconImage,
 };

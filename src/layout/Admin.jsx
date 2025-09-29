@@ -188,7 +188,7 @@ const AdminLayout = () => {
           />
         </Sider>
         <Content className="dk-content">
-          <div style={{ height: '3000px' }}>
+          <div style={{ height: '1200px' }}>
             <Outlet />
           </div>
         </Content>
