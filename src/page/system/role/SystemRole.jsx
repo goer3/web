@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { TitleSuffix } from '@/components/Text';
 import { PageHeaderBackgroundImage, TagLeftBlackIconImage } from '@/components/Image';
-import { Form, Input, Row, Col, Button, Space } from 'antd';
+import { Form, Row, Col, Button, Space } from 'antd';
 import { SearchOutlined, ClearOutlined, DownOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import FormItem from '@/components/Form';
@@ -33,19 +33,29 @@ const PageHeader = () => {
 const RoleIndex = () => {
   const [searchForm] = Form.useForm();
   const [searchFormExpand, setSearchFormExpand] = useState(false);
-  const searchFormExpandLimit = 4;
+  const searchFormExpandLimit = 14;
 
   // 搜索表单 items
   const searchFormItems = [
     { label: '关键字1', name: 'keyword1', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字2', name: 'keyword2', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字3', name: 'keyword3', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字4', name: 'keyword4', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字5', name: 'keyword5', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字6', name: 'keyword6', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字7', name: 'keyword7', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    // { label: '关键字8', name: 'keyword8', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
-    { label: '状态', name: 'status', type: 'select', allowClear: true, showSearch: true, mode: 'multiple', placeholder: '请选择状态', options: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] },
+    { label: '关键字2', name: 'keyword2', type: 'select', allowClear: true, showSearch: true, placeholder: '请选择状态', options: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] },
+    { label: '关键字3', name: 'keyword3', type: 'textarea', allowClear: true, rows: 1, placeholder: '请输入内容' },
+    { label: '关键字4', name: 'keyword4', type: 'password', allowClear: true, placeholder: '请输入密码' },
+    { label: '关键字6', name: 'keyword6', type: 'number', addonAfter: '元', addonBefore: '￥', placeholder: '请输入数字' },
+    { label: '关键字7', name: 'keyword7', type: 'datePicker', allowClear: true, width: '100%', placeholder: '请选择日期' },
+    { label: '关键字8', name: 'keyword8', type: 'timePicker', allowClear: true, width: '100%', placeholder: '请选择时间' },
+    {
+      label: '关键字9', name: 'keyword9', type: 'treeSelect', allowClear: true, treeDefaultExpandAll: true, placeholder: '请选择树形选择', treeData: [{
+          value: 'parent 1-0',
+          title: 'parent 1-0',
+          children: [
+            {value: 'leaf1',title: 'leaf1'},
+            {value: 'leaf2',title: 'leaf2'}
+          ],
+        },
+        { value: 'parent 1-1', title: 'parent 1-1' }
+      ]
+    },
   ];
 
   // 生成搜索表单组件
@@ -69,19 +79,12 @@ const RoleIndex = () => {
             <Form form={searchForm} name='searchForm' colon={false} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
               <Row gutter={20}>
                 {generateSearchFormItemsComponents()}
-                <Col span={24} key="x" style={{ textAlign: 'right' }}>
+                <Col span={24} key="searchFormActions" style={{ textAlign: 'right' }}>
                   <Space>
                     <Button icon={<SearchOutlined />} htmlType="submit">条件筛选</Button>
-                    <Button
-                      icon={<ClearOutlined />}
-                      onClick={() => { }}
-                    >
-                      清理条件
-                    </Button>
+                    <Button icon={<ClearOutlined />} onClick={() => { }}>清理条件</Button>
                     {searchFormItems.length > searchFormExpandLimit && (
-                      <a style={{ userSelect: 'none' }} onClick={() => {
-                        setSearchFormExpand(!searchFormExpand);
-                      }}>
+                      <a style={{ userSelect: 'none' }} onClick={() => { setSearchFormExpand(!searchFormExpand) }}>
                         <DownOutlined rotate={searchFormExpand ? 180 : 0} /> {searchFormExpand ? '收起条件' : '展开更多'}
                       </a>
                     )}

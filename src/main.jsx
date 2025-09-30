@@ -10,6 +10,7 @@ const ColorBlack = '#001529'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
 const ColorLightBlue = '#e3e8f0'; // 浅蓝色
 const ColorBlue = '#0052D9'; // 蓝色
+const ColorGray = '#0000001a'; // 灰色
 const HeaderHeight = '50px'; // 头部高度
 const SiderBackgroundColor = '#f7f8fa'; // 侧边栏背景颜色
 
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')).render(
         margin: 10,
         marginLG: 15,
         controlHeight: 26,
+        controlItemBgActive: ColorLightBlue,
       },
       components: {
         Layout: {
@@ -70,6 +72,7 @@ createRoot(document.getElementById('root')).render(
           primaryShadow: 'none',
           dangerShadow: 'none',
           contentFontSize: 12,
+          contentFontSizeSM: 12,
           defaultHoverColor: ColorBlack,
           defaultHoverBorderColor: ColorBlack,
         },
@@ -81,6 +84,19 @@ createRoot(document.getElementById('root')).render(
         },
         Form: {
           labelFontSize: 13,
+        },
+        Select: {
+          activeOutlineColor: 'none',
+          optionFontSize: 13,
+          optionSelectedFontWeight: 'normal',
+        },
+        InputNumber: {
+          inputFontSize: 13,
+          activeShadow: 'none',
+        },
+        DatePicker: {
+          inputFontSize: 13,
+          activeShadow: 'none',
         }
       }
     }}
