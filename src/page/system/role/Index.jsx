@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { TitleSuffix } from '@/components/Text';
 import { PageHeaderBackgroundImage, TagLeftBlackIconImage } from '@/components/Image';
+import { Form, Input, Row, Col } from 'antd';
 
 // 页面配置
 const config = {
@@ -27,6 +28,8 @@ const PageHeader = () => {
 };
 
 const RoleIndex = () => {
+  const [searchForm] = Form.useForm();
+
   return (
     <>
       <Helmet>
@@ -35,7 +38,20 @@ const RoleIndex = () => {
       <div>
         <PageHeader />
         <div className="dk-page-content">
-          角色列表
+          <div className="dk-page-search">
+            <Form form={searchForm} name='searchForm' colon={false} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
+              <Row gutter={20}>
+                <Col span={6}>
+                  <Form.Item label="关键字" name='keyword'>
+                    <Input placeholder='请输入关键字进行检索' />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Form>
+          </div>
+          <div className="dk-page-table">
+
+          </div>
         </div>
       </div>
     </>

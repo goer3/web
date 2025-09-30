@@ -327,7 +327,7 @@ body {
   background-size: cover;
   width: 100%;
   padding: 20px 15px;
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
+  border-bottom: 1px solid @color-gray;
 
   .dk-page-header-title {
     background-clip: text !important;
@@ -362,4 +362,15 @@ body {
 
 .dk-page-content {
   padding: 10px;
+
+  .dk-page-search {
+    border: 1px solid @color-gray;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+
+  .dk-page-table {
+    border: 1px solid @color-gray;
+    padding: 10px;
+  }
 }

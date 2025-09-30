@@ -30,7 +30,8 @@ createRoot(document.getElementById('root')).render(
         marginXS: 5,
         margin: 10,
         marginLG: 15,
-        controlHeight: 28
+        controlHeight: 28,
+        controlHeightSM: 26
       },
       components: {
         Layout: {
@@ -69,8 +70,6 @@ createRoot(document.getElementById('root')).render(
           primaryShadow: 'none',
           dangerShadow: 'none',
           contentFontSize: 12,
-          contentLineHeight: '28px',
-          controlHeight: '28px',
           defaultHoverColor: ColorBlue,
         },
         Input: {

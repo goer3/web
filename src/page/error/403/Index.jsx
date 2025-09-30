@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet';
 import { TitleSuffix } from '@/components/Text';
-import { PageNotFoundImage } from '@/components/Image';
+import { PermissionDeniedImage } from '@/components/Image';
 import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
@@ -19,7 +19,7 @@ const PermissionDeniedError = () => {
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
       <div className="dk-error">
-        <div className="dk-error-bg" style={{ backgroundImage: `url(${PageNotFoundImage})` }}>{config.title}</div>
+        <div className="dk-error-bg" style={{ backgroundImage: `url(${PermissionDeniedImage})` }}>{config.title}</div>
         <div style={{ marginTop: '50px' }}>
           <Button className="dk-error-btn"
             type="primary"
