@@ -30,8 +30,7 @@ createRoot(document.getElementById('root')).render(
         marginXS: 5,
         margin: 10,
         marginLG: 15,
-        controlHeight: 28,
-        controlHeightSM: 26
+        controlHeight: 26,
       },
       components: {
         Layout: {
@@ -54,6 +53,7 @@ createRoot(document.getElementById('root')).render(
         },
         Menu: {
           collapsedIconSize: 17,
+          itemHeight: 40,
           itemBg: SiderBackgroundColor,
           itemActiveBg: ColorBlack,
           itemMarginBlock: 0,
@@ -70,7 +70,8 @@ createRoot(document.getElementById('root')).render(
           primaryShadow: 'none',
           dangerShadow: 'none',
           contentFontSize: 12,
-          defaultHoverColor: ColorBlue,
+          defaultHoverColor: ColorBlack,
+          defaultHoverBorderColor: ColorBlack,
         },
         Input: {
           activeShadow: 'none',

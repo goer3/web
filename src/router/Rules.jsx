@@ -16,49 +16,49 @@ export const Rules = [
     children: [
       {
         path: '/dashboard',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
       },
       {
         path: '/user',
         children: [
           {
             path: '/user/list',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/user/list/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/user/list/UserList.jsx')))
           },
           {
             path: '/user/group',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/user/group/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/user/group/UserGroup.jsx')))
           }
         ]
       },
       {
         path: '/project',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/project/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/project/Project.jsx')))
       },
       {
         path: '/system',
         children: [
           {
             path: '/system/role',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/system/role/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/role/SystemRole.jsx')))
           },
           {
             path: '/system/menu',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/system/menu/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/menu/SystemMenu.jsx')))
           },
           {
             path: '/system/api',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/system/api/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/api/SystemApi.jsx')))
           },
           {
             path: '/system/setting',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/system/setting/Index.jsx')))
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/setting/SystemSetting.jsx')))
           }
         ]
       },
       {
         path: '/information',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/information/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/information/Information.jsx')))
       }
     ]
   },
@@ -68,19 +68,19 @@ export const Rules = [
     children: [
       {
         path: '/login',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/login/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/login/Login.jsx')))
       },
       {
         path: '/403',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/error/403/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/error/403/403.jsx')))
       },
       {
         path: '/404',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/error/404/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/error/404/404.jsx')))
       },
       {
         path: '/500',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/error/500/Index.jsx')))
+        element: RouterLazyLoad(React.lazy(() => import('@/page/error/500/500.jsx')))
       }
     ]
   },

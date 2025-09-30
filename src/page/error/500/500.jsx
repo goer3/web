@@ -1,16 +1,16 @@
 import { Helmet } from 'react-helmet';
 import { TitleSuffix } from '@/components/Text';
-import { PermissionDeniedImage } from '@/components/Image';
+import { InternalServerErrorImage } from '@/components/Image';
 import { Button } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router';
 
 // 页面配置
 const config = {
-  title: '403'
+  title: '500'
 };
 
-const PermissionDeniedError = () => {
+const InternalServerError = () => {
   const navigate = useNavigate();
 
   return (
@@ -19,8 +19,10 @@ const PermissionDeniedError = () => {
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
       <div className="dk-error">
-        <div className="dk-error-bg" style={{ backgroundImage: `url(${PermissionDeniedImage})` }}>{config.title}</div>
-        <div style={{ marginTop: '50px' }}>
+        <div className="dk-error-bg" style={{ backgroundImage: `url(${InternalServerErrorImage})` }}></div>
+        <div className="dk-error-title">{config.title}</div>
+        <div className="dk-error-desc">服务器错误，请稍后再试！</div>
+        <div style={{ marginTop: '20px' }}>
           <Button className="dk-error-btn"
             type="primary"
             icon={<ArrowLeftOutlined />}
@@ -31,4 +33,4 @@ const PermissionDeniedError = () => {
   );
 };
 
-export default PermissionDeniedError;
+export default InternalServerError;
