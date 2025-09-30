@@ -35,6 +35,13 @@ const RoleIndex = () => {
   const [searchFormExpand, setSearchFormExpand] = useState(false);
   const searchFormExpandLimit = 14;
 
+
+  // 树形选择数据
+  const treeSelectData = [
+    { value: 'parent 1-0', title: 'parent 1-0', children: [{ value: 'leaf1', title: 'leaf1' }, { value: 'leaf2', title: 'leaf2' }] },
+    { value: 'parent 1-1', title: 'parent 1-1' }
+  ];
+
   // 搜索表单 items
   const searchFormItems = [
     { label: '关键字1', name: 'keyword1', type: 'input', allowClear: true, placeholder: '请输入关键字进行检索' },
@@ -44,18 +51,7 @@ const RoleIndex = () => {
     { label: '关键字6', name: 'keyword6', type: 'number', addonAfter: '元', addonBefore: '￥', placeholder: '请输入数字' },
     { label: '关键字7', name: 'keyword7', type: 'datePicker', allowClear: true, width: '100%', placeholder: '请选择日期' },
     { label: '关键字8', name: 'keyword8', type: 'timePicker', allowClear: true, width: '100%', placeholder: '请选择时间' },
-    {
-      label: '关键字9', name: 'keyword9', type: 'treeSelect', allowClear: true, treeDefaultExpandAll: true, placeholder: '请选择树形选择', treeData: [{
-          value: 'parent 1-0',
-          title: 'parent 1-0',
-          children: [
-            {value: 'leaf1',title: 'leaf1'},
-            {value: 'leaf2',title: 'leaf2'}
-          ],
-        },
-        { value: 'parent 1-1', title: 'parent 1-1' }
-      ]
-    },
+    { label: '关键字9', name: 'keyword9', type: 'treeSelect', allowClear: true, treeDefaultExpandAll: true, placeholder: '请选择树形选择', treeData: treeSelectData },
   ];
 
   // 生成搜索表单组件
