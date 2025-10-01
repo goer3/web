@@ -183,6 +183,9 @@ const RoleIndex = () => {
         <div className="dk-page-content">
           {/* 搜索 */}
           <div className="dk-page-search">
+            <div className="dk-page-search-title">
+              <span>搜索</span>
+            </div>
             <Form form={searchForm} name="searchForm" colon={false} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
               <Row gutter={20}>
                 {generateSearchFormItemsComponents()}
