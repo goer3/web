@@ -108,10 +108,15 @@ const RoleIndex = () => {
     }
   };
 
+  // 分页参数
+  const [pageSize, setPageSize] = useState(2);
+  const [pageNumber, setPageNumber] = useState(1);
+
   // 数据字段定义
   const columns = [
-    { title: 'ID', dataIndex: 'id', key: 'id', width: 100, fixed: 'left' },
-    { title: '名称', dataIndex: 'name', key: 'name' },
+    // 排序
+    { title: 'ID', dataIndex: 'id', key: 'id', width: 100, fixed: 'left', sorter: (a, b) => a.id - b.id },
+    { title: '名称', dataIndex: 'name', key: 'name', sorter: (a, b) => a.name.localeCompare(b.name) },
     { title: '唯一标识', dataIndex: 'keyword', key: 'keyword' },
     { title: '描述', dataIndex: 'description', key: 'description' },
     { title: '状态', dataIndex: 'status', key: 'status' },
@@ -152,7 +157,10 @@ const RoleIndex = () => {
       createBy: 'admin',
       updateBy: 'admin'
     },
-    { id: 2, name: '角色2', keyword: 'user', description: '角色2描述', status: '禁用', createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' }
+    { id: 2, name: '角色2', keyword: 'user', description: '角色2描述', status: '禁用', createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 3, name: '角色3', keyword: 'user', description: '角色2描述', status: '禁用', createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 4, name: '角色4', keyword: 'user', description: '角色2描述', status: '禁用', createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 5, name: '角色5', keyword: 'user', description: '角色2描述', status: '禁用', createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' }
   ];
 
   // 行选择
@@ -242,7 +250,20 @@ const RoleIndex = () => {
                   expandedRowRender: (record) => <div>{record.description}</div>,
                   rowExpandable: (record) => record.keyword !== 'administrator'
                 }}
-                scroll={{ x: 'max-content' }}
+                scroll={dataSource.length > 0 ? { x: 'max-content' } : undefined}
+                pagination={{
+                  pageSize: pageSize,
+                  current: pageNumber,
+                  total: dataSource.length,
+                  showSizeChanger: true,
+                  showQuickJumper: true,
+                  hideOnSinglePage: false,
+                  showTotal: (total) => `共 ${total} 条`,
+                  onChange: (page, pageSize) => {
+                    setPageSize(pageSize);
+                    setPageNumber(page);
+                  }
+                }}
               />
             </div>
           </div>

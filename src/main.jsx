@@ -9,6 +9,7 @@ import AdminRoute from '@/route.jsx';
 const ColorBlack = '#001529'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
 const ColorLightBlue = '#e3e8f0'; // 浅蓝色
+const ColorLightGray = '#f0f0f0'; // 浅灰色
 const ColorBlue = '#0052D9'; // 蓝色
 const ColorGray = '#0000001a'; // 灰色
 const HeaderHeight = '50px'; // 头部高度
@@ -105,11 +106,14 @@ createRoot(document.getElementById('root')).render(
         },
         Table: {
           cellFontSizeSM: 13,
-          lineHeight: '32px',
+          lineHeight: '34px',
           cellPaddingBlockSM: 0,
           cellPaddingInlineSM: '10px',
           rowSelectedBg: ColorLightBlue,
           rowSelectedHoverBg: ColorLightBlue,
+        },
+        Pagination: {
+          itemActiveBg: ColorLightGray,
         }
       }
     }}

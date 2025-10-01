@@ -413,11 +413,24 @@ body {
     border-right: 1px solid @color-light-gray;
   }
 
-  .ant-table-cell-fix-left:first-child {
+  // 当包含 ant-empty 时，为表格添加左右边框
+  &:has(.ant-empty) {
     border-left: 1px solid @color-light-gray;
-  }
-
-  .ant-table-cell-fix-right:last-child {
     border-right: 1px solid @color-light-gray;
   }
+
+  // 当不包含 ant-empty 时，才设置固定列的边框
+  &:not(:has(.ant-empty)) {
+    .ant-table-cell-fix-left:first-child {
+      border-left: 1px solid @color-light-gray;
+    }
+
+    .ant-table-cell-fix-right:last-child {
+      border-right: 1px solid @color-light-gray;
+    }
+  }
+}
+
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+  margin-bottom: 0;
 }
