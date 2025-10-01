@@ -10,7 +10,7 @@ const FormItemComponentType = {
     input: (props) => <Input {...props} />,
     textarea: (props) => <Input.TextArea {...props} />,
     password: (props) => <Input.Password {...props} />,
-    number: (props) => <InputNumber {...props} />,
+    number: (props) => <InputNumber {...props} style={{ width: props?.width }} />,
     select: (props) => <Select {...props} />,
     treeSelect: (props) => <TreeSelect {...props} />,
     datePicker: (props) => (

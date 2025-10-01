@@ -71,7 +71,7 @@ createRoot(document.getElementById('root')).render(
           defaultShadow: 'none',
           primaryShadow: 'none',
           dangerShadow: 'none',
-          contentFontSize: 12,
+          contentFontSize: 13,
           contentFontSizeSM: 12,
           defaultHoverColor: ColorBlack,
           defaultHoverBorderColor: ColorBlack,
@@ -81,6 +81,8 @@ createRoot(document.getElementById('root')).render(
           errorActiveShadow: 'none',
           warningActiveShadow: 'none',
           inputFontSize: 13,
+          paddingBlock: '2px',
+          paddingInline: '10px'
         },
         Form: {
           labelFontSize: 13,

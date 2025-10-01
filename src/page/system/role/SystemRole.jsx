@@ -31,9 +31,12 @@ const PageHeader = () => {
 };
 
 const RoleIndex = () => {
+  // 搜索表单
   const [searchForm] = Form.useForm();
+  // 搜索表单展开状态
   const [searchFormExpand, setSearchFormExpand] = useState(false);
-  const searchFormExpandLimit = 14;
+  // 搜索表单展开限制
+  const searchFormExpandLimit = 4;
 
 
   // 树形选择数据
@@ -48,7 +51,7 @@ const RoleIndex = () => {
     { label: '关键字2', name: 'keyword2', type: 'select', allowClear: true, showSearch: true, placeholder: '请选择状态', options: [{ label: '启用', value: 1 }, { label: '禁用', value: 0 }] },
     { label: '关键字3', name: 'keyword3', type: 'textarea', allowClear: true, rows: 1, placeholder: '请输入内容' },
     { label: '关键字4', name: 'keyword4', type: 'password', allowClear: true, placeholder: '请输入密码' },
-    { label: '关键字6', name: 'keyword6', type: 'number', addonAfter: '元', addonBefore: '￥', placeholder: '请输入数字' },
+    { label: '关键字6', name: 'keyword6', type: 'number', addonAfter: '元', addonBefore: '￥', width: '100%', placeholder: '请输入数字' },
     { label: '关键字7', name: 'keyword7', type: 'datePicker', allowClear: true, width: '100%', placeholder: '请选择日期' },
     { label: '关键字8', name: 'keyword8', type: 'timePicker', allowClear: true, width: '100%', placeholder: '请选择时间' },
     { label: '关键字9', name: 'keyword9', type: 'treeSelect', allowClear: true, treeDefaultExpandAll: true, placeholder: '请选择树形选择', treeData: treeSelectData },

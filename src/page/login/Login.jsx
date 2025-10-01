@@ -17,8 +17,20 @@ const LoginIndex = () => {
       </Helmet>
       <ConfigProvider theme={{
         token: {
-          controlHeight: 28
+          controlHeight: 30
         },
+        components: {
+          Input: {
+            paddingBlock: '4px',
+            inputFontSize: 14,
+          },
+          Button: {
+            contentFontSize: 14,
+          },
+          Form: {
+            labelFontSize: 14,
+          },
+        }
       }}>
         <div style={{
           width: '350px',
@@ -28,7 +40,7 @@ const LoginIndex = () => {
           backgroundColor: '#ffffff'
         }}>
           <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <img src={LogoImage} alt="logo" style={{ height: '20px', userSelect: 'none' }} />
+            <img src={LogoImage} alt="logo" style={{ height: '22px', userSelect: 'none' }} />
           </div>
           <Divider plain style={{ color: '#00000050', letterSpacing: '2px' }}>欢迎回来，立即登录</Divider>
           <div>
@@ -50,14 +62,14 @@ const LoginIndex = () => {
                 name="password"
                 rules={[{ required: true, message: '请输入密码' }]}
               >
-                <Input type="password" placeholder="密码" />
+                <Input.Password placeholder="密码" />
               </Form.Item>
               <Form.Item
                 label="验证码"
                 name="code"
                 rules={[{ required: true, message: '请输入验证码' }]}
               >
-                <Input placeholder="请输入双因子认证验证码（未绑定则随便输入）" />
+                <Input placeholder="双因子认证验证码（未绑定则随便输入）" />
               </Form.Item>
               <Form.Item>
                 <Flex justify="space-between" align="center">
