@@ -369,13 +369,21 @@ body {
 
   .dk-page-search {
     border: 1px solid @color-gray;
-    padding: 20px;
+    padding: 20px 15px;
     margin-bottom: 10px;
   }
 
-  .dk-page-table {
+  .dk-page-main {
     border: 1px solid @color-gray;
-    padding: 10px;
+    padding: 20px 15px;
+
+    .dk-page-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
   }
 }
 
@@ -383,4 +391,33 @@ body {
 .ant-select-multiple,
 .ant-checkbox-wrapper {
   font-size: 13px;
+}
+
+.dk-operation-link {
+  font-size: 14px;
+  padding: 0;
+  height: 20px;
+  line-height: 20px;
+}
+
+.ant-table-wrapper table {
+  border-top: 1px solid @color-light-gray;
+
+  // 当没有左固定列时，为表格添加左边框
+  &:not(:has(.ant-table-cell-fix-left)) {
+    border-left: 1px solid @color-light-gray;
+  }
+
+  // 当没有右固定列时，为表格添加右边框
+  &:not(:has(.ant-table-cell-fix-right)) {
+    border-right: 1px solid @color-light-gray;
+  }
+
+  .ant-table-cell-fix-left:first-child {
+    border-left: 1px solid @color-light-gray;
+  }
+
+  .ant-table-cell-fix-right:last-child {
+    border-right: 1px solid @color-light-gray;
+  }
 }

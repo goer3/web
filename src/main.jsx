@@ -99,6 +99,17 @@ createRoot(document.getElementById('root')).render(
         DatePicker: {
           inputFontSize: 13,
           activeShadow: 'none',
+        },
+        Dropdown: {
+          controlHeight: 28
+        },
+        Table: {
+          cellFontSizeSM: 13,
+          lineHeight: '32px',
+          cellPaddingBlockSM: 0,
+          cellPaddingInlineSM: '10px',
+          rowSelectedBg: ColorLightBlue,
+          rowSelectedHoverBg: ColorLightBlue,
         }
       }
     }}
