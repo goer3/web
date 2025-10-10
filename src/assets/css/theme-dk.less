@@ -1,0 +1,530 @@
+@import '@/assets/css/theme-var.less';
+
+// 基础样式
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*全局滚动条*/
+::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  background-clip: padding-box;
+  min-height: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+// 登录页面
+.dk-login {
+  .dk-login-github svg {
+    font-size: 30px;
+  }
+}
+
+.dk-error-btn {
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.ant-result .ant-result-title {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.ant-result .ant-result-extra {
+  margin-top: 20px;
+}
+
+// 表单错误提示
+.ant-form-item .ant-form-item-explain-error {
+  font-size: 12px;
+}
+
+// 箭头图标基础样式
+.dk-right-arrow {
+  left: calc(50% - 6px);
+}
+
+.dk-left-arrow {
+  left: calc(50% - 3px);
+}
+
+.dk-right-arrow,
+.dk-left-arrow,
+.dk-up-arrow,
+.dk-down-arrow {
+  position: absolute;
+  top: 50%;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: 8px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 0;
+    transition:
+      background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    content: '';
+  }
+}
+
+.dk-right-arrow {
+  &::before {
+    transform: rotate(45deg) translateY(-3px);
+  }
+
+  &::after {
+    transform: rotate(-45deg) translateY(3px);
+  }
+}
+
+.dk-left-arrow {
+  &::before {
+    transform: rotate(-45deg) translateY(-3px);
+  }
+
+  &::after {
+    transform: rotate(45deg) translateY(3px);
+  }
+}
+
+.dk-up-arrow {
+  &::before {
+    transform: rotate(-45deg) translateX(3px);
+  }
+
+  &::after {
+    transform: rotate(45deg) translateX(-3px);
+  }
+}
+
+.dk-down-arrow {
+  &::before {
+    transform: rotate(45deg) translateX(3px);
+  }
+
+  &::after {
+    transform: rotate(-45deg) translateX(-3px);
+  }
+}
+
+// 加载动画
+.dk-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// 头部
+.dk-header {
+  box-shadow: @box-shadow-bottom;
+  // 固定在顶部
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  // 左右对齐
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .dk-logo {
+    user-select: none;
+    padding: 13px 0;
+    height: 50px;
+  }
+
+  .dk-header-avatar:hover {
+    cursor: pointer;
+  }
+}
+
+// 主体布局
+.dk-layout {
+  position: relative;
+  top: @header-height;
+}
+
+// 侧边栏
+.dk-sider {
+  box-shadow: @box-shadow-right;
+  height: calc(100vh - @header-height - @header-height);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  user-select: none;
+
+  .dk-menu {
+    padding: 10px 0;
+    letter-spacing: 1px;
+
+    .ant-menu-item-selected {
+      color: #ffffff;
+    }
+  }
+
+  // 侧边栏折叠时，选中项的父菜单背景颜色和文字颜色
+  .ant-menu-inline-collapsed .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: @color-black;
+    color: #ffffff;
+  }
+
+  // 侧边栏触发器
+  .ant-layout-sider-trigger {
+    box-shadow: @box-shadow-top;
+    box-shadow: @box-shadow-right;
+  }
+}
+
+// 内容主体
+.dk-content {
+  height: calc(100vh - @header-height);
+  overflow-y: auto;
+}
+
+.dk-dropdown-userinfo {
+  padding: 5px;
+  background-color: #ffffff;
+  border: 1px solid @color-gray;
+  box-shadow: @box-shadow-bottom;
+  width: 300px;
+
+  .dk-dropdown-userinfo-account {
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: flex-start;
+    border: 1px solid @color-gray;
+  }
+
+  .dk-account-info {
+    margin-left: 15px;
+
+    .dk-account-name {
+      font-weight: bold;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      line-height: 22px;
+    }
+
+    .dk-account-item {
+      font-size: 12px;
+      color: rgba(0, 0, 0, 0.5);
+      letter-spacing: 0.5px;
+      line-height: 20px;
+
+      .ant-typography,
+      .ant-typography p {
+        display: inline-block;
+        margin-bottom: 0;
+        font-size: 12px;
+        color: rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.5px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .dk-dropdown-userinfo-btn-group {
+    background-color: @color-gray;
+
+    .dk-dropdown-userinfo-btn-left {
+      border: 1px solid @color-gray;
+      border-top: none;
+      border-right: none;
+      color: @color-black;
+    }
+
+    .dk-dropdown-userinfo-btn-right {
+      border: 1px solid @color-gray;
+      border-top: none;
+      border-left: none;
+      color: @color-black;
+    }
+
+    .dk-dropdown-userinfo-btn-center {
+      border: 1px solid @color-gray;
+      border-top: none;
+      color: @color-black;
+    }
+  }
+
+  .dk-dropdown-userinfo-statistic {
+    text-align: center;
+    padding: 15px 0;
+    border: 1px solid @color-gray;
+    border-top: none;
+    margin-bottom: 5px;
+
+    .ant-statistic .ant-statistic-title {
+      font-size: 13px;
+    }
+
+    .ant-statistic .ant-statistic-content {
+      font-size: 13px;
+      color: @color-blue;
+      font-weight: bold;
+    }
+  }
+}
+
+.ant-badge .ant-badge-count,
+.ant-badge .ant-badge-dot,
+.ant-badge .ant-scroll-number-custom-component {
+  font-size: 6px;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.ant-badge .ant-badge-count-sm {
+  min-width: 12px;
+  height: 12px;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.dk-page-header {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  padding: 20px 15px;
+  border-bottom: 1px solid @color-gray;
+
+  .dk-page-header-title {
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent;
+    display: inline;
+    line-height: 20px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: clamp(15px, 25vw, 15px);
+    // background: linear-gradient(90deg, #00084d, #1d63ed);
+    background: linear-gradient(90deg, #000000, #00084d);
+
+    img {
+      height: 12px;
+      margin-right: 5px;
+    }
+  }
+
+  .dk-page-header-body {
+    padding-left: 15px;
+    margin-top: 15px;
+
+    p {
+      font-size: 13px;
+      color: rgba(0, 0, 0, 0.6);
+      margin: 0;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.dk-page-content {
+  padding: 10px;
+
+  .dk-page-search {
+    position: relative;
+    border: 1px solid @color-gray;
+    padding: 20px 15px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .dk-page-search-title {
+    position: absolute;
+    top: 7px;
+    left: -25px;
+    width: 80px;
+    height: 16px;
+    background-color: #a3010a;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // 逆时针旋转45度
+    transform: rotate(-45deg);
+
+    span {
+      line-height: 16px;
+      font-size: 10px;
+      line-height: 1.4;
+      color: @color-white;
+      user-select: none;
+    }
+  }
+
+  .dk-page-main {
+    border: 1px solid @color-gray;
+    padding: 20px 15px;
+
+    .dk-page-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.ant-select-single .ant-select-selector,
+.ant-select-multiple,
+.ant-checkbox-wrapper {
+  font-size: 13px;
+}
+
+.dk-operation-link {
+  font-size: 13px;
+  padding: 0;
+  height: 20px;
+  line-height: 20px;
+}
+
+.ant-table-wrapper table {
+  border-top: 1px solid @color-light-gray;
+
+  // 当没有左固定列时，为表格添加左边框
+  &:not(:has(.ant-table-cell-fix-left)) {
+    border-left: 1px solid @color-light-gray;
+  }
+
+  // 当没有右固定列时，为表格添加右边框
+  &:not(:has(.ant-table-cell-fix-right)) {
+    border-right: 1px solid @color-light-gray;
+  }
+
+  // 当包含 ant-empty 时，为表格添加左右边框
+  &:has(.ant-empty) {
+    border-left: 1px solid @color-light-gray;
+    border-right: 1px solid @color-light-gray;
+  }
+
+  // 当不包含 ant-empty 时，才设置固定列的边框
+  &:not(:has(.ant-empty)) {
+    .ant-table-cell-fix-left:first-child {
+      border-left: 1px solid @color-light-gray;
+    }
+
+    .ant-table-cell-fix-right:last-child {
+      border-right: 1px solid @color-light-gray;
+    }
+  }
+}
+
+.ant-table-wrapper .ant-table-row-expand-icon::before {
+  top: 6px;
+}
+
+.ant-table-wrapper .ant-table-row-expand-icon::after {
+  inset-inline-start: 6px;
+}
+
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+.ant-tag {
+  font-size: 10px;
+  line-height: 17px;
+  height: 18px;
+}
+
+.dk-modal-form {
+  margin-top: 15px;
+}
+
+.ant-form-item .ant-form-item-explain,
+.ant-form-item .ant-form-item-extra {
+  line-height: 25px;
+}
+
+.ant-pagination {
+  .ant-select-single.ant-select-sm .ant-select-selector {
+    font-size: 13px;
+  }
+}
+
+.ant-pagination .ant-pagination-options-quick-jumper input:focus,
+.ant-pagination .ant-pagination-options-quick-jumper input:focus-within {
+  box-shadow: none;
+}
+
+.dk-upload-drag-icon {
+  font-size: 50px;
+  height: 50px;
+  line-height: 50px;
+  color: @color-blue;
+  margin-bottom: 10px;
+}
+
+.dk-upload-text {
+  font-size: 14px;
+  color: #00000050;
+  margin-bottom: 10px;
+}
+
+.dk-upload-hint {
+  font-size: 13px;
+  color: #00000050;
+}
+
+.dk-upload-button {
+  margin-top: 10px;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  border-color: #d9d9d9;
+}
+
+.ant-drawer .ant-drawer-header,
+.ant-drawer .ant-drawer-footer {
+  padding: 10px 20px;
+}
+
+.ant-drawer .ant-drawer-body {
+  padding: 20px;
+}
+
+.ant-tree .ant-tree-treenode {
+  line-height: 25px;
+}
+
+.dk-page-actions {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ant-popconfirm .ant-popconfirm-message .ant-popconfirm-description {
+  margin-top: 0;
+}
+
+.ant-popconfirm .ant-popconfirm-buttons button {
+  font-size: 11px;
+  height: 16px;
+  line-height: 16px;
+}
