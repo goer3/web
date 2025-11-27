@@ -56,7 +56,7 @@ createRoot(document.getElementById('root')).render(
         },
         Menu: {
           collapsedIconSize: 17,
-          fontSize: 14,
+          fontSize: 13,
           itemHeight: 40,
           itemBg: SiderBackgroundColor,
           itemActiveBg: ColorBlack,
@@ -66,7 +66,8 @@ createRoot(document.getElementById('root')).render(
           itemSelectedColor: ColorWhite,
           itemHoverBg: ColorLightBlue,
           itemHoverColor: ColorBlack,
-          subMenuItemSelectedColor: ColorBlack
+          subMenuItemSelectedColor: ColorBlack,
+          dropdownWidth: 80
         },
         Button: {
           colorPrimary: ColorBlack,
