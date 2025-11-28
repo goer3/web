@@ -180,25 +180,36 @@ body {
     letter-spacing: 1px;
   }
 
-  // 侧边栏折叠时，选中项的父菜单背景颜色和文字颜色
-  // .ant-menu-item-selected,
-  // .ant-menu-submenu-inline > .ant-menu-submenu-title:hover {
-  //   color: @color-white;
-  // }
-
-  // .ant-menu-item-selected,
-  // .ant-menu-submenu-selected > .ant-menu-submenu-title,
-  // .ant-menu-submenu-selected,
-  // .ant-menu-submenu-title:hover {
-  //   background-color: @color-black;
-  //   color: @color-white;
-  // }
-
   // 侧边栏触发器
   .ant-layout-sider-trigger {
     box-shadow: @box-shadow-top;
     box-shadow: @box-shadow-right;
   }
+}
+
+// 菜单展开的时候，有子菜单的菜单选中颜色
+.ant-menu-submenu-selected > .ant-menu-submenu-title {
+  color: @color-black;
+}
+
+// 菜单展开时候，有子菜单的菜单 hover 颜色
+.ant-menu-submenu > .ant-menu-submenu-title:hover {
+  background-color: @color-black;
+  color: @color-white;
+}
+
+// 菜单折叠时候，一级菜单选中颜色
+.ant-menu-inline-collapsed {
+  .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    background-color: @color-black;
+    color: @color-white;
+  }
+}
+
+// 菜单折叠时候，弹出菜单选中颜色
+.ant-menu-submenu-popup .ant-menu-vertical .ant-menu-submenu-selected>.ant-menu-submenu-title {
+  background-color: @color-black;
+  color: @color-white;
 }
 
 // 内容主体

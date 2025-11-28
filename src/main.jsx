@@ -66,10 +66,7 @@ createRoot(document.getElementById('root')).render(
           itemHoverColor: ColorWhite,
           itemSelectedBg: ColorBlack,
           itemSelectedColor: ColorWhite,
-          subMenuItemHoverBg: ColorBlack,
-          subMenuItemHoverColor: ColorWhite,
-          subMenuItemSelectedBg: ColorBlack,
-          subMenuItemSelectedColor: ColorWhite,
+          // subMenuItemSelectedColor: ColorWhite,
           dropdownWidth: 80
         },
         Button: {
