@@ -6,15 +6,15 @@ const config = {
   title: '接口配置'
 };
 
-const APIIndex = () => {
+const SystemApi = () => {
   return (
     <>
       <Helmet>
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
-      <h2>APIIndex</h2>
+      <h2>SystemApi</h2>
     </>
   );
 };
 
-export default APIIndex;
+export default SystemApi;

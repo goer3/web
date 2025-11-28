@@ -6,15 +6,15 @@ const config = {
   title: '菜单配置'
 };
 
-const MenuIndex = () => {
+const SystemMenu = () => {
   return (
     <>
       <Helmet>
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
-      <h2>MenuIndex</h2>
+      <h2>SystemMenu</h2>
     </>
   );
 };
 
-export default MenuIndex;
+export default SystemMenu;

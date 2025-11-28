@@ -6,15 +6,15 @@ const config = {
   title: '系统设置'
 };
 
-const SettingIndex = () => {
+const SystemSetting = () => {
   return (
     <>
       <Helmet>
         <title>{config.title + TitleSuffix}</title>
       </Helmet>
-      <h2>SettingIndex</h2>
+      <h2>SystemSetting</h2>
     </>
   );
 };
 
-export default SettingIndex;
+export default SystemSetting;

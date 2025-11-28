@@ -6,7 +6,7 @@ const config = {
   title: '版本信息'
 };
 
-const InformationIndex = () => {
+const Information = () => {
   return (
     <>
       <Helmet>
@@ -17,4 +17,4 @@ const InformationIndex = () => {
   );
 };
 
-export default InformationIndex;
+export default Information;

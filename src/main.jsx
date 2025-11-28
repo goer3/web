@@ -6,7 +6,7 @@ import '@/assets/css/theme-dk.less'; // 样式主题
 import AdminRoute from '@/route.jsx';
 
 // 主体变量
-const ColorBlack = '#001529'; // 黑色
+const ColorBlack = '#000000'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
 const ColorLightBlue = '#e3e8f0'; // 浅蓝色
 const ColorLightGray = '#f0f0f0'; // 浅灰色
@@ -44,10 +44,10 @@ createRoot(document.getElementById('root')).render(
           headerColor: ColorBlack,
           headerHeight: HeaderHeight,
           headerPadding: '0 15px',
-          lightSiderBg: SiderBackgroundColor,
+          lightSiderBg: ColorWhite,
           lightTriggerBg: ColorWhite,
           lightTriggerColor: ColorBlack,
-          siderBg: SiderBackgroundColor,
+          siderBg: ColorWhite,
           triggerBg: ColorWhite,
           triggerColor: ColorBlack,
           triggerHeight: HeaderHeight,
@@ -58,15 +58,18 @@ createRoot(document.getElementById('root')).render(
           collapsedIconSize: 17,
           fontSize: 13,
           itemHeight: 40,
-          itemBg: SiderBackgroundColor,
-          itemActiveBg: ColorBlack,
           itemMarginBlock: 0,
           itemMarginInline: 0,
+          itemBg: ColorWhite,
+          itemActiveBg: ColorBlack,
+          itemHoverBg: ColorBlack,
+          itemHoverColor: ColorWhite,
           itemSelectedBg: ColorBlack,
           itemSelectedColor: ColorWhite,
-          itemHoverBg: ColorLightBlue,
-          itemHoverColor: ColorBlack,
-          subMenuItemSelectedColor: ColorBlack,
+          subMenuItemHoverBg: ColorBlack,
+          subMenuItemHoverColor: ColorWhite,
+          subMenuItemSelectedBg: ColorBlack,
+          subMenuItemSelectedColor: ColorWhite,
           dropdownWidth: 80
         },
         Button: {

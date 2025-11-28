@@ -52,7 +52,7 @@ const PageHeader = () => {
   );
 };
 
-const RoleIndex = () => {
+const SystemRole = () => {
   // 搜索表单
   const [searchForm] = Form.useForm();
   // 搜索表单展开状态
@@ -649,4 +649,4 @@ const RoleIndex = () => {
   );
 };
 
-export default RoleIndex;
+export default SystemRole;

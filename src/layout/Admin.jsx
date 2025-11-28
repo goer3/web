@@ -8,18 +8,18 @@ import {
   ManOutlined,
   PhoneOutlined,
   SlidersOutlined,
-  UsergroupAddOutlined,
   UserOutlined,
   ClusterOutlined,
   KubernetesOutlined,
   InboxOutlined,
-  DockerOutlined,
-  BuildTwoTone,
-  FileProtectOutlined,
+  BuildOutlined,
   HddOutlined,
   PartitionOutlined,
   BlockOutlined,
-  RadarChartOutlined
+  FundOutlined,
+  CodepenOutlined,
+  FileProtectOutlined,
+  CalendarOutlined
 } from '@ant-design/icons';
 import { Avatar, Badge, Button, Col, Dropdown, Layout, Menu, Row, Statistic, Typography, Cascader, Space } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
@@ -59,96 +59,76 @@ const menuList = [
     children: [
       {
         key: '/kubernetes/overview',
-        icon: <RadarChartOutlined />,
-        label: '集群概览'
+        icon: <FundOutlined />,
+        label: '概览'
       },
       {
         key: '/kubernetes/node',
         icon: <BlockOutlined />,
-        label: '节点管理（Node）'
+        label: '节点'
       },
       {
         key: '/kubernetes/namespace',
         icon: <InboxOutlined />,
-        label: '名称空间（Namespace）'
+        label: '名称空间'
       },
       {
         key: '/kubernetes/pod',
-        icon: <DockerOutlined />,
+        icon: <CodepenOutlined />,
         label: 'Pod'
       },
       {
         key: '/kubernetes/workload',
-        icon: <BuildTwoTone />,
-        label: '工作负载（Workload）',
+        icon: <BuildOutlined />,
+        label: '工作负载',
         children: [
           {
             key: '/kubernetes/workload/deployment',
-            label: '部署（Deployment）'
+            label: '部署'
           },
           {
             key: '/kubernetes/workload/statefulset',
-            label: '有状态集（StatefulSet）'
+            label: '有状态集'
           },
           {
             key: '/kubernetes/workload/daemonset',
-            label: '守护进程集（DaemonSet）'
+            label: '守护进程集'
           },
           {
             key: '/kubernetes/workload/job',
-            label: '任务（Job）'
+            label: '任务'
           },
           {
             key: '/kubernetes/workload/cronjob',
-            label: '定时任务（CronJob）'
+            label: '定时任务'
           }
         ]
       },
       {
         key: '/kubernetes/service',
         icon: <AppstoreAddOutlined />,
-        label: '服务（Service）'
+        label: '服务'
       },
       {
         key: '/kubernetes/ingress',
         icon: <PartitionOutlined />,
-        label: '负载均衡（Ingress）'
+        label: '负载均衡'
       },
       {
         key: '/kubernetes/configmap',
         icon: <AuditOutlined />,
-        label: '配置（ConfigMap）'
-      },
-      {
-        key: '/kubernetes/secret',
-        icon: <FileProtectOutlined />,
-        label: '密钥（Secret）'
+        label: '配置'
       },
       {
         key: '/kubernetes/volume',
         icon: <HddOutlined />,
-        label: '存储（Volume）'
-      }
-    ]
-  },
-  {
-    key: '/user',
-    icon: <UsergroupAddOutlined />,
-    label: '用户中心',
-    children: [
-      {
-        key: '/user/list',
-        label: '用户列表'
-      },
-      {
-        key: '/user/group',
-        label: '用户分组'
+        label: '存储'
       }
     ]
   },
   {
     key: '/system',
-    icon: <AuditOutlined />,
+    icon: <FileProtectOutlined />,
     label: '权限中心',
     children: [
       {
@@ -171,7 +151,7 @@ const menuList = [
   },
   {
     key: '/information',
-    icon: <SlidersOutlined />,
+    icon: <CalendarOutlined />,
     label: '版本信息'
   }
 ];
@@ -261,30 +241,10 @@ const optionData = [
       {
         value: '测试集群A',
         label: '测试集群A',
-        children: [
-          {
-            value: '测试名称空间A',
-            label: '测试名称空间A'
-          },
-          {
-            value: '测试名称空间B',
-            label: '测试名称空间B'
-          }
-        ]
       },
       {
         value: '测试集群B',
         label: '测试集群B',
-        children: [
-          {
-            value: '测试名称空间C',
-            label: '测试名称空间C'
-          },
-          {
-            value: '测试名称空间D',
-            label: '测试名称空间D'
-          }
-        ]
       }
     ]
   },
@@ -295,30 +255,10 @@ const optionData = [
       {
         value: '开发集群A',
         label: '开发集群A',
-        children: [
-          {
-            value: '开发名称空间A',
-            label: '开发名称空间A'
-          },
-          {
-            value: '开发名称空间B',
-            label: '开发名称空间B'
-          }
-        ]
       },
       {
         value: '开发集群B',
         label: '开发集群B',
-        children: [
-          {
-            value: '开发名称空间C',
-            label: '开发名称空间C'
-          },
-          {
-            value: '开发名称空间D',
-            label: '开发名称空间D'
-          }
-        ]
       }
     ]
   }
@@ -344,29 +284,26 @@ const AdminLayout = () => {
     // 从 localStorage 读取已有的值
     const environment = localStorage.getItem('environment');
     const cluster = localStorage.getItem('cluster');
-    const namespace = localStorage.getItem('namespace');
 
     // 如果存在完整的值，则使用它们
-    if (environment && cluster && namespace) {
-      return [environment, cluster, namespace];
+    if (environment && cluster) {
+      return [environment, cluster];
     }
 
     // 否则使用默认值并保存到 localStorage
-    const defaultValue = [optionData[0].value, optionData[0].children[0].value, optionData[0].children[0].children[0].value];
+    const defaultValue = [optionData[0].value, optionData[0].children[0].value];
 
     localStorage.setItem('environment', defaultValue[0]);
     localStorage.setItem('cluster', defaultValue[1]);
-    localStorage.setItem('namespace', defaultValue[2]);
 
     return defaultValue;
   });
 
   // 级联选择器变化事件
   const onOptionChange = (value) => {
-    if (value && value.length === 3) {
+    if (value && value.length === 2) {
       localStorage.setItem('environment', value[0]);
       localStorage.setItem('cluster', value[1]);
-      localStorage.setItem('namespace', value[2]);
       setCascaderValue(value);
     }
   };
@@ -379,7 +316,7 @@ const AdminLayout = () => {
       <Header className="dk-header">
         <Space size="large">
           <img src={LogoImage} alt="logo" className="dk-logo" />
-          <Cascader style={{ width: '300px' }} options={optionData} onChange={onOptionChange} placeholder="选择环境/集群/名称空间" showSearch={{ optionFilter }} value={cascaderValue} />
+          <Cascader style={{ width: '200px' }} options={optionData} onChange={onOptionChange} placeholder="选择环境/集群" showSearch={{ optionFilter }} value={cascaderValue} />
         </Space>
         <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender}>
           <Badge size="small" count={GenerateGenderBadge(1)} offset={[-5, 22]}>
@@ -393,7 +330,7 @@ const AdminLayout = () => {
           collapsible
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
-          width={220}
+          width={200}
           collapsedWidth={50}
           trigger={collapsed ? <ArrowRightIcon /> : <ArrowLeftIcon />}
         >

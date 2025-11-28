@@ -6,7 +6,7 @@ const config = {
   title: '工作空间'
 };
 
-const DashboardIndex = () => {
+const Dashboard = () => {
   return (
     <>
       <Helmet>
@@ -17,4 +17,4 @@ const DashboardIndex = () => {
   );
 };
 
-export default DashboardIndex;
+export default Dashboard;

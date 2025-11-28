@@ -19,21 +19,12 @@ export const Rules = [
         element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
       },
       {
-        path: '/user',
-        children: [
-          {
-            path: '/user/list',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/user/list/UserList.jsx')))
-          },
-          {
-            path: '/user/group',
-            element: RouterLazyLoad(React.lazy(() => import('@/page/user/group/UserGroup.jsx')))
-          }
-        ]
+        path: '/kubernetes/pod',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
       },
       {
-        path: '/project',
-        element: RouterLazyLoad(React.lazy(() => import('@/page/project/Project.jsx')))
+        path: '/kubernetes/workload/deployment',
+        element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
       },
       {
         path: '/system',
