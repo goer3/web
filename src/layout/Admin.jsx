@@ -132,6 +132,10 @@ const menuList = [
     label: '权限中心',
     children: [
       {
+        key: '/system/user',
+        label: '用户管理'
+      },
+      {
         key: '/system/role',
         label: '角色配置'
       },

@@ -1,4 +1,4 @@
-import LogoImage from '@/assets/images/logo/logo.svg'; // Logo
+import LogoImage from '@/assets/images/logo/logo.png'; // Logo
 import DefaultAvatarImage from '@/assets/images/avatar/default.png'; // 默认头像
 import LoginBackgroundImage from '@/assets/images/background/bg.png'; // 登录背景
 import PageHeaderBackgroundImage from '@/assets/images/background/banner.png'; // 页面头部图片

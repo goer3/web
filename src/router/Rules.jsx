@@ -30,6 +30,10 @@ export const Rules = [
         path: '/system',
         children: [
           {
+            path: '/system/user',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/system/user/SystemUser.jsx')))
+          },
+          {
             path: '/system/role',
             element: RouterLazyLoad(React.lazy(() => import('@/page/system/role/SystemRole.jsx')))
           },

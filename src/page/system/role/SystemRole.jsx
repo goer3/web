@@ -570,7 +570,7 @@ const SystemRole = () => {
         open={menuDrawerVisible}
         onClose={() => setMenuDrawerVisible(false)}
         maskClosable={false}
-        width={400}
+        width={600}
         footer={
           <Button type="primary" icon={<SaveOutlined />}>
             保存菜单授权
