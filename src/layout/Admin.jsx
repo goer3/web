@@ -283,6 +283,20 @@ const AdminLayout = () => {
     setOpenKeys(getParentMenuKeyList(pathname));
   }, [pathname, collapsed]);
 
+  // 侧边栏收缩时触发图表重新调整大小
+  useEffect(() => {
+    // 监听内容区域的大小变化
+    const contentElement = document.querySelector('.dk-content');
+    if (!contentElement) return;
+    const resizeObserver = new ResizeObserver(() => {
+      window.dispatchEvent(new Event('resize'));
+    });
+    resizeObserver.observe(contentElement);
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   // 级联选择器状态初始化
   const [cascaderValue, setCascaderValue] = useState(() => {
     // 从 localStorage 读取已有的值
