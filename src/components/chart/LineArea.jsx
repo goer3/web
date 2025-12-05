@@ -9,7 +9,7 @@ import { TooltipComponent } from 'echarts/components';
 echarts.use([GridComponent, LineChart, CanvasRenderer, UniversalTransition, TooltipComponent]);
 
 // 封装 Area 图表组件
-const ChartArea = ({ data, height, showPoint = false }) => {
+const ChartLineArea = ({ data, height, showPoint = false }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -21,10 +21,10 @@ const ChartArea = ({ data, height, showPoint = false }) => {
 
     const option = {
       grid: {
-        x: '10%', //x 偏移量
-        y: '15%', // y 偏移量
-        width: '85%', // 宽度
-        height: '70%' // 高度
+        top: '20',
+        left: '15',
+        right: '15',
+        bottom: '20',
       },
       xAxis: {
         type: 'category',
@@ -44,11 +44,6 @@ const ChartArea = ({ data, height, showPoint = false }) => {
         splitNumber: 5,
         splitLine: {
           show: true,
-          lineStyle: {
-            type: 'solid',
-            width: 0.5,
-            color: '#f0f0f0'
-          }
         }
       },
       series: [
@@ -63,7 +58,7 @@ const ChartArea = ({ data, height, showPoint = false }) => {
           data: [820, 932, 901, 934, 1290, 1330, 1320, 1200, 1100, 1150, 1250, 1300],
           lineStyle: {
             color: '#000',
-            width: 1
+            width: 2
           },
           areaStyle: {
             color: '#000',
@@ -104,4 +99,4 @@ const ChartArea = ({ data, height, showPoint = false }) => {
   return <div ref={chartRef} style={{ height }}></div>;
 };
 
-export { ChartArea };
+export { ChartLineArea };

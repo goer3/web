@@ -6,7 +6,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 
 echarts.use([TitleComponent, LegendComponent, RadarChart, CanvasRenderer]);
 
-const ChartRadar = ({ data, height }) => {
+const ChartRadar2 = ({ data, height }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
@@ -19,41 +19,35 @@ const ChartRadar = ({ data, height }) => {
     const option = {
       title: {
         show: false
-        // text: '标题'
       },
       legend: {
-        show: false,
-        data: ['Allocated Budget', 'Actual Spending']
+        show: false
       },
-      radar: {
-        radius: '70%',
-        axisName: {
-          fontSize: 10
-        },
-        axisNameGap: 10,
-        splitArea: {
-          areaStyle: {
-            color: ['#fafafa', '#fff']
+      radar: [
+        {
+          indicator: [{ text: '数据1' }, { text: '数据2' }, { text: '数据3' }, { text: '数据4' }, { text: '数据5' }, { text: '数据6' }],
+          radius: '70%',
+          splitNumber: 5,
+          shape: 'circle',
+          axisName: {
+            fontSize: 10
+          },
+          axisNameGap: 10,
+          splitArea: {
+            areaStyle: {
+              color: ['#fafafa', '#fff']
+            }
           }
-        },
-        indicator: [
-          { name: '数据上', max: 6500 },
-          { name: '数据左上', max: 16000 },
-          { name: '数据左下', max: 30000 },
-          { name: '数据下', max: 38000 },
-          { name: '数据右下', max: 52000 },
-          { name: '数据右上', max: 25000 }
-        ]
-      },
+        }
+      ],
       series: [
         {
-          name: 'Budget vs spending',
           type: 'radar',
           symbolSize: 0,
           data: [
             {
-              value: [4200, 3000, 20000, 35000, 50000, 18000],
-              name: 'Allocated Budget',
+              value: [80, 50, 0.4, -100, 200, 100],
+              name: 'Data A',
               lineStyle: {
                 color: '#000',
                 width: 2
@@ -94,4 +88,4 @@ const ChartRadar = ({ data, height }) => {
   return <div ref={chartRef} style={{ height }}></div>;
 };
 
-export { ChartRadar };
+export { ChartRadar2 };
