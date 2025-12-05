@@ -32,6 +32,11 @@ const ChartRadar = ({ data, height }) => {
           fontSize: 10
         },
         axisNameGap: 5,
+        splitArea: {
+          areaStyle: {
+            color: ['#fafafa', '#fff']
+          }
+        },
         indicator: [
           { name: '数据上', max: 6500 },
           { name: '数据左上', max: 16000 },
@@ -46,19 +51,24 @@ const ChartRadar = ({ data, height }) => {
           name: 'Budget vs spending',
           type: 'radar',
           symbolSize: 0,
-
           data: [
             {
               value: [4200, 3000, 20000, 35000, 50000, 18000],
-              name: 'Allocated Budget'
-            },
-            {
-              value: [5000, 14000, 28000, 26000, 42000, 21000],
-              name: 'Actual Spending'
+              name: 'Allocated Budget',
+              lineStyle: {
+                color: '#000'
+              }
             }
           ]
         }
-      ]
+      ],
+      tooltip: {
+        show: true,
+        textStyle: {
+          fontSize: 10
+        },
+        extraCssText: 'border-radius: 0;box-shadow:none;border: 1px solid #ddd;padding:10px;'
+      }
     };
 
     chartInstance.current?.setOption(option);
