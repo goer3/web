@@ -10,6 +10,7 @@ const ColorBlack = '#000000'; // 黑色
 const ColorWhite = '#ffffff'; // 白色
 const ColorLightBlue = '#e3e8f0'; // 浅蓝色
 const ColorLightGray = '#f0f0f0'; // 浅灰色
+const ColorLightGray2 = '#fafafa'; // 浅灰色2
 const ColorBlue = '#0052D9'; // 蓝色
 const ColorGray = '#0000001a'; // 灰色
 const HeaderHeight = '50px'; // 头部高度
@@ -110,7 +111,13 @@ createRoot(document.getElementById('root')).render(
         Pagination: {
           itemActiveBg: ColorLightGray
         },
-        Drawer: {}
+        Drawer: {},
+        Card: {
+          headerHeight: 34,
+          headerBg: ColorLightGray2,
+          headerPadding: 15,
+          bodyPadding: 10
+        }
       }
     }}
   >
