@@ -17,11 +17,14 @@ import {
   SaveOutlined,
   SearchOutlined,
   SisternodeOutlined,
-  UsergroupAddOutlined
+  UsergroupAddOutlined,
+  VerticalAlignMiddleOutlined,
+  VerticalAlignBottomOutlined
 } from '@ant-design/icons';
 import { useState } from 'react';
 import FormItem from '@/components/Form';
 import { GenerateGenderIcon, GenerateMethodTag, GenerateStatusTag } from '@/components/Tag';
+import { GetTreeAllKeys, GetTreeNodeChildrenKeys } from '@/components/Tree';
 
 const { Dragger } = Upload;
 const { Search } = Input;
@@ -347,45 +350,94 @@ const SystemRole = () => {
     }
   ];
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 接口授权相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 接口授权 Drawer
   const [apiDrawerVisible, setApiDrawerVisible] = useState(false);
+  // 选中的接口
+  const [apiCheckedKeys, setApiCheckedKeys] = useState(['/api/v1/system/user/list', '/api/v1/system/user/detail']);
+  // 展开接口树
+  const [apiExpandKeys, setApiExpandKeys] = useState([]);
 
   // 接口树数据
   const apiTreeData = [
     {
-      title: '用户模块',
-      key: '/api/v1/user/list',
+      title: '系统管理',
+      key: '/api/v1/system',
       method: 'GET',
       isApi: false,
       children: [
         {
-          title: '用户模块（读）',
-          key: '/api/v1/user/list11',
+          title: '用户相关',
+          key: '/api/v1/system/user',
           method: 'GET',
           isApi: false,
           children: [
-            { title: '接口1-1', key: '/api/v1/user/list1', method: 'GET', isApi: true },
-            { title: '接口1-2', key: '/api/v1/user/list2', method: 'POST', isApi: true },
-            { title: '接口1-3', key: '/api/v1/user/list3', method: 'PUT', isApi: true },
-            { title: '接口1-4', key: '/api/v1/user/list4', method: 'DELETE', isApi: true }
+            {
+              title: '用户接口（读）',
+              key: '/api/v1/system/user/read-apis',
+              method: 'GET',
+              isApi: false,
+              children: [
+                { title: '用户列表', key: '/api/v1/system/user/list', method: 'GET', isApi: true },
+                { title: '用户详情', key: '/api/v1/system/user/detail', method: 'GET', isApi: true }
+              ]
+            },
+            {
+              title: '用户接口（写）',
+              key: '/api/v1/system/user/write-apis',
+              method: 'POST',
+              isApi: false,
+              children: [
+                { title: '添加用户', key: '/api/v1/system/user/add', method: 'POST', isApi: true },
+                { title: '修改用户', key: '/api/v1/system/user/edit', method: 'PUT', isApi: true },
+                { title: '删除用户', key: '/api/v1/system/user/delete', method: 'DELETE', isApi: true }
+              ]
+            }
           ]
         },
         {
-          title: '用户模块（写）',
-          key: '/api/v1/user/list12',
-          method: 'POST',
+          title: '角色相关',
+          key: '/api/v1/system/role',
+          method: 'GET',
           isApi: false,
           children: [
-            { title: '接口1-1', key: '/api/v1/user/add1', method: 'POST', isApi: true },
-            { title: '接口1-2', key: '/api/v1/user/add2', method: 'PUT', isApi: true },
-            { title: '接口1-3', key: '/api/v1/user/add3', method: 'DELETE', isApi: true },
-            { title: '接口1-4', key: '/api/v1/user/add4', method: 'GET', isApi: true }
+            {
+              title: '角色接口（读）',
+              key: '/api/v1/system/role/read-apis',
+              method: 'GET',
+              isApi: false,
+              children: [
+                { title: '角色列表', key: '/api/v1/system/role/list', method: 'GET', isApi: true },
+                { title: '角色详情', key: '/api/v1/system/role/detail', method: 'GET', isApi: true }
+              ]
+            },
+            {
+              title: '角色接口（写）',
+              key: '/api/v1/system/role/write-apis',
+              method: 'POST',
+              isApi: false,
+              children: [
+                { title: '添加角色', key: '/api/v1/system/role/add', method: 'POST', isApi: true },
+                { title: '修改角色', key: '/api/v1/system/role/edit', method: 'PUT', isApi: true },
+                { title: '删除角色', key: '/api/v1/system/role/delete', method: 'DELETE', isApi: true }
+              ]
+            }
           ]
         }
       ]
     }
   ];
 
+  // 接口树选择
+  const onApiCheck = (checkedKeys, info) => {
+    setApiCheckedKeys(checkedKeys);
+  };
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 角色用户相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 角色用户分页
   const [roleUserPageSize, setRoleUserPageSize] = useState(2);
   const [roleUserPageNumber, setRoleUserPageNumber] = useState(1);
@@ -586,19 +638,41 @@ const SystemRole = () => {
         open={apiDrawerVisible}
         onClose={() => setApiDrawerVisible(false)}
         maskClosable={false}
-        width={600}
+        width={800}
         footer={
-          <Button type="primary" icon={<SaveOutlined />}>
-            保存接口授权
-          </Button>
+          <Space>
+            <Button danger icon={<SaveOutlined />} onClick={() => {}}>
+              保存接口授权
+            </Button>
+            <Button
+              icon={apiExpandKeys.length > 0 ? <VerticalAlignMiddleOutlined /> : <VerticalAlignBottomOutlined />}
+              onClick={() => {
+                setApiExpandKeys(apiExpandKeys.length > 0 ? [] : GetTreeAllKeys(apiTreeData));
+              }}
+            >
+              {apiExpandKeys.length > 0 ? '收起所有接口' : '展开所有接口'}
+            </Button>
+          </Space>
         }
       >
         <Tree
           checkable
           showLine={true}
-          defaultExpandAll={true}
+          defaultExpandAll={false}
+          expandedKeys={apiExpandKeys}
           autoExpandParent={true}
           treeData={apiTreeData}
+          onCheck={onApiCheck}
+          onExpand={(expandedKeys, { expanded, node }) => {
+            if (!expanded) {
+              // 折叠节点时，移除该节点及其所有子节点
+              const childKeys = GetTreeNodeChildrenKeys(node);
+              setApiExpandKeys(expandedKeys.filter((key) => !childKeys.includes(key)));
+            } else {
+              setApiExpandKeys(expandedKeys);
+            }
+          }}
+          checkedKeys={apiCheckedKeys}
           titleRender={(node) => (
             <div>
               <span>{node.title}</span>
