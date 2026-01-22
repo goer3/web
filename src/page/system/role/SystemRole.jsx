@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { TitleSuffix } from '@/components/Text';
 import { PageHeaderBackgroundImage, TagLeftBlackIconImage } from '@/components/Image';
-import { Avatar, Button, Col, Drawer, Dropdown, Form, Input, Modal, Popconfirm, Row, Space, Table, Tree, Upload } from 'antd';
+import { Avatar, Button, Col, Drawer, Dropdown, Form, Input, Modal, Popconfirm, Row, Space, Table, Tree, Upload, Typography } from 'antd';
 import {
   ApiOutlined,
   ClearOutlined,
@@ -19,7 +19,9 @@ import {
   SisternodeOutlined,
   UsergroupAddOutlined,
   VerticalAlignMiddleOutlined,
-  VerticalAlignBottomOutlined
+  VerticalAlignBottomOutlined,
+  HistoryOutlined,
+  CopyOutlined
 } from '@ant-design/icons';
 import { useState } from 'react';
 import FormItem from '@/components/Form';
@@ -28,6 +30,7 @@ import { GetTreeAllKeys, GetTreeNodeChildrenKeys } from '@/components/Tree';
 
 const { Dragger } = Upload;
 const { Search } = Input;
+const { Paragraph } = Typography;
 
 // 页面配置
 const config = {
@@ -56,6 +59,9 @@ const PageHeader = () => {
 };
 
 const SystemRole = () => {
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 表格相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 搜索表单
   const [searchForm] = Form.useForm();
   // 搜索表单展开状态
@@ -157,6 +163,21 @@ const SystemRole = () => {
           <Button className="dk-operation-link" color="primary" variant="link" icon={<UsergroupAddOutlined />} onClick={() => setRoleUserDrawerVisible(true)}>
             人员
           </Button>
+          <Button
+            className="dk-operation-link"
+            color="#0052d9"
+            variant="link"
+            icon={<CopyOutlined />}
+            onClick={() => {
+              setCopyRoleModalVisible(true);
+              copyRoleForm.setFieldsValue({
+                copyId: record.id,
+                copyName: record.name
+              });
+            }}
+          >
+            复制
+          </Button>
           <Popconfirm placement="topRight" description="是否确认删除该角色？" onConfirm={() => {}} okText="是" cancelText="否">
             <Button className="dk-operation-link" color="red" variant="link" icon={<DeleteOutlined />}>
               删除
@@ -172,7 +193,7 @@ const SystemRole = () => {
     {
       id: 1,
       name: '角色1',
-      keyword: 'administrator',
+      keyword: 'Administrator',
       description: '角色1描述',
       status: 1,
       createTime: '2021-01-01 12:00:00',
@@ -180,10 +201,10 @@ const SystemRole = () => {
       createBy: 'admin',
       updateBy: 'admin'
     },
-    { id: 2, name: '角色2', keyword: 'user', description: '角色2描述', status: 2, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
-    { id: 3, name: '角色3', keyword: 'user', description: '角色2描述', status: 2, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
-    { id: 4, name: '角色4', keyword: 'user', description: '角色2描述', status: 1, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
-    { id: 5, name: '角色5', keyword: 'user', description: '角色2描述', status: 1, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' }
+    { id: 2, name: '角色2', keyword: 'User', description: '角色2描述', status: 2, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 3, name: '角色3', keyword: 'User', description: '角色2描述', status: 2, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 4, name: '角色4', keyword: 'User', description: '角色2描述', status: 1, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' },
+    { id: 5, name: '角色5', keyword: 'User', description: '角色2描述', status: 1, createTime: '2021-01-01 12:00:00', updateTime: '2021-01-01 12:00:00', createBy: 'admin', updateBy: 'admin' }
   ];
 
   // 行选择
@@ -196,17 +217,33 @@ const SystemRole = () => {
     })
   };
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 添加角色相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 添加角色 Modal
   const [addRoleModalVisible, setAddRoleModalVisible] = useState(false);
-
   // 添加角色
   const [addRoleForm] = Form.useForm();
 
   // 添加角色表单
   const addRoleFormItems = [
-    { label: '角色名称', name: 'name', type: 'input', allowClear: true, placeholder: '请输入角色名称', rules: [{ required: true, message: '请输入角色名称' }] },
-    { label: '唯一标识', name: 'keyword', type: 'input', allowClear: true, placeholder: '请输入唯一标识', rules: [{ required: true, message: '请输入唯一标识' }] },
-    { label: '描述', name: 'description', type: 'textarea', allowClear: true, rows: 1, placeholder: '请输入描述', rules: [{ required: true, message: '请输入描述' }] }
+    { label: '新角色名称', name: 'name', type: 'input', allowClear: true, placeholder: '请输入角色名称', rules: [
+      { required: true, message: '请输入角色名称' },
+      { pattern: /^\S+$/, message: '角色名称不能包含空格' },
+      { min: 2, message: '最少2个字符' },
+      { max: 20, message: '最多20个字符' }
+    ] },
+    { label: '唯一标识', name: 'keyword', extra: '强制使用英文大驼峰式命名，如：SuperAdministrator', type: 'input', allowClear: true, placeholder: '请输入唯一标识', rules: [
+      { required: true, message: '请输入唯一标识' },
+      { pattern: /^[A-Z][A-Za-z0-9]*$/, message: '格式不正确，应为英文大驼峰式命名' },
+      { min: 2, message: '最少2个字符' },
+      { max: 50, message: '最多50个字符' }
+    ] },
+    { label: '描述', name: 'description', type: 'textarea', allowClear: true, rows: 1, placeholder: '请输入描述', rules: [
+      { required: true, message: '请输入描述' },
+      { min: 2, message: '最少2个字符' },
+      { max: 500, message: '最多500个字符' }
+    ] }
   ];
 
   // 生成添加角色表单组件
@@ -214,6 +251,29 @@ const SystemRole = () => {
     return addRoleFormItems.map((field) => FormItem(field));
   };
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 复制角色相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 复制角色 Modal
+  const [copyRoleModalVisible, setCopyRoleModalVisible] = useState(false);
+  // 复制角色
+  const [copyRoleForm] = Form.useForm();
+
+  // 复制角色字段
+  const copyRoleFormItems = [
+    { label: '复制角色ID', name: 'copyId', type: 'input', disabled: true, hidden: false, rules: [{ required: true, message: '请输入角色ID' }] },
+    { label: '复制角色名称', name: 'copyName', type: 'input', disabled: true, rules: [{ required: true, message: '请输入角色名称' }] },
+    ...addRoleFormItems
+  ];
+
+  // 生成复制角色表单组件
+  const generateCopyRoleFormItemsComponents = () => {
+    return copyRoleFormItems.map((field) => FormItem(field));
+  };
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 批量导入相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 批量导入 Modal
   const [multiImportModalVisible, setMultiImportModalVisible] = useState(false);
 
@@ -239,6 +299,9 @@ const SystemRole = () => {
     }
   };
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // 菜单授权相关逻辑
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // 菜单授权 Drawer
   const [menuDrawerVisible, setMenuDrawerVisible] = useState(false);
 
@@ -554,6 +617,7 @@ const SystemRole = () => {
                   <Button icon={<RedoOutlined />}>刷新列表</Button>
                   <Button icon={<FileExcelOutlined />}>导入模板</Button>
                   <Button icon={<CloudDownloadOutlined />}>导出数据</Button>
+                  <Button icon={<HistoryOutlined />}>操作记录</Button>
                 </Space>
               </div>
             </div>
@@ -594,6 +658,18 @@ const SystemRole = () => {
       <Modal title="新增角色" footer={null} maskClosable={false} width={400} open={addRoleModalVisible} onCancel={() => setAddRoleModalVisible(false)}>
         <Form className="dk-modal-form" form={addRoleForm} name="addRoleForm" colon={false} layout="vertical">
           {generateAddRoleFormItemsComponents()}
+          <Form.Item>
+            <Button block type="primary" onClick={() => {}}>
+              提交
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* 复制角色 */}
+      <Modal title="复制角色" footer={null} maskClosable={false} width={400} open={copyRoleModalVisible} onCancel={() => setCopyRoleModalVisible(false)}>
+        <Form className="dk-modal-form" form={copyRoleForm} name="copyRoleForm" colon={false} layout="vertical">
+          {generateCopyRoleFormItemsComponents()}
           <Form.Item>
             <Button block type="primary" onClick={() => {}}>
               提交
@@ -673,12 +749,13 @@ const SystemRole = () => {
             }
           }}
           checkedKeys={apiCheckedKeys}
+          className="dk-tree-select"
           titleRender={(node) => (
-            <div>
+            <Paragraph copyable={{ text: node.title + '：' + node.key + '：' + node.method }}>
               <span>{node.title}</span>
               <span>{node.isApi ? '：' + node.key + '：' : ''}</span>
               <span>{node.isApi ? GenerateMethodTag(node.method) : ''}</span>
-            </div>
+            </Paragraph>
           )}
         />
       </Drawer>

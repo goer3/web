@@ -1,4 +1,5 @@
-import { ConfigProvider, DatePicker, Form, Input, InputNumber, Select, TimePicker, TreeSelect } from 'antd';
+import { ConfigProvider, DatePicker, Form, Input, InputNumber, Select, TimePicker, TreeSelect, Space } from 'antd';
+import { WarningOutlined } from '@ant-design/icons';
 import locale from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
@@ -24,7 +25,13 @@ const FormItemComponentType = {
 // 传入字段属性，返回 Form.Item 组件
 const FormItem = (props) => {
   return (
-    <Form.Item key={props?.name} name={props?.name} label={props?.label} rules={props?.rules}>
+    <Form.Item 
+      key={props?.name} 
+      name={props?.name} 
+      label={props?.label} 
+      rules={props?.rules} 
+      style={{display: props?.hidden === true ? 'none' : 'block'}} 
+      extra={props?.extra ? <Space size="small" color='yellow'><WarningOutlined />{props?.extra}</Space> : undefined}>
       {FormItemComponentType[props?.type](props)}
     </Form.Item>
   );
