@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   AppstoreAddOutlined,
   AuditOutlined,
@@ -19,9 +19,10 @@ import {
   FundOutlined,
   CodepenOutlined,
   FileProtectOutlined,
-  CalendarOutlined
+  CalendarOutlined,
+  SearchOutlined
 } from '@ant-design/icons';
-import { Avatar, Badge, Button, Col, Dropdown, Layout, Menu, Row, Statistic, Typography, Cascader, Space } from 'antd';
+import { Avatar, Badge, Button, Col, Dropdown, Layout, Menu, Row, Statistic, Typography, Cascader, Space, Select, Input } from 'antd';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/Icon';
 import { DefaultAvatarImage, LogoImage } from '@/components/Image';
@@ -29,6 +30,11 @@ import { GenerateGenderBadge } from '@/components/Tag';
 
 const { Header, Content, Sider } = Layout;
 const { Paragraph } = Typography;
+
+// 本地存储 namespace 相关操作
+const defaultNamespace = 'default';
+const getLocalStorageNamespace = () => localStorage.getItem('namespace') || defaultNamespace;
+const setLocalStorageNamespace = (value) => localStorage.setItem('namespace', value || defaultNamespace);
 
 // 菜单项
 const menuList = [
@@ -80,29 +86,7 @@ const menuList = [
       {
         key: '/kubernetes/workload',
         icon: <BuildOutlined />,
-        label: '工作负载',
-        children: [
-          {
-            key: '/kubernetes/workload/deployment',
-            label: '部署'
-          },
-          {
-            key: '/kubernetes/workload/statefulset',
-            label: '有状态集'
-          },
-          {
-            key: '/kubernetes/workload/daemonset',
-            label: '守护进程集'
-          },
-          {
-            key: '/kubernetes/workload/job',
-            label: '任务'
-          },
-          {
-            key: '/kubernetes/workload/cronjob',
-            label: '定时任务'
-          }
-        ]
+        label: '工作负载'
       },
       {
         key: '/kubernetes/service',
@@ -115,12 +99,12 @@ const menuList = [
         label: '负载均衡'
       },
       {
-        key: '/kubernetes/configmap',
+        key: '/kubernetes/configmap-and-secret',
         icon: <AuditOutlined />,
         label: '配置'
       },
       {
-        key: '/kubernetes/volume',
+        key: '/kubernetes/storage',
         icon: <HddOutlined />,
         label: '存储'
       }
@@ -237,18 +221,18 @@ const dropdownUserInfoPopupRender = () => {
 };
 
 // 全局选项
-const optionData = [
+const environmentAndClusterOptionData = [
   {
     value: '测试环境',
     label: '测试环境',
     children: [
       {
         value: '测试集群A',
-        label: '测试集群A',
+        label: '测试集群A'
       },
       {
         value: '测试集群B',
-        label: '测试集群B',
+        label: '测试集群B'
       }
     ]
   },
@@ -258,17 +242,34 @@ const optionData = [
     children: [
       {
         value: '开发集群A',
-        label: '开发集群A',
+        label: '开发集群A'
       },
       {
         value: '开发集群B',
-        label: '开发集群B',
+        label: '开发集群B'
       }
     ]
   }
 ];
 
+const namespaceOptionData = [
+  {
+    value: 'default',
+    label: 'default'
+  },
+  {
+    value: 'kube-system',
+    label: 'kube-system'
+  },
+  {
+    value: 'kube-public',
+    label: 'kube-public'
+  }
+];
+
 const AdminLayout = () => {
+  // 用于标记是否是初始化阶段
+  const isInitialMount = useRef(true);
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
@@ -299,25 +300,21 @@ const AdminLayout = () => {
 
   // 级联选择器状态初始化
   const [cascaderValue, setCascaderValue] = useState(() => {
-    // 从 localStorage 读取已有的值
+    // 从 localStorage 读取已有的值，如果存在完整的值，则使用它们
     const environment = localStorage.getItem('environment');
     const cluster = localStorage.getItem('cluster');
-
-    // 如果存在完整的值，则使用它们
     if (environment && cluster) {
       return [environment, cluster];
     }
 
-    // 否则使用默认值并保存到 localStorage
-    const defaultValue = [optionData[0].value, optionData[0].children[0].value];
-
+    // 否则使用默认值并保存到 localStorage，并且设置默认的名称空间
+    const defaultValue = [environmentAndClusterOptionData[0].value, environmentAndClusterOptionData[0].children[0].value];
     localStorage.setItem('environment', defaultValue[0]);
     localStorage.setItem('cluster', defaultValue[1]);
-
     return defaultValue;
   });
 
-  // 级联选择器变化事件
+  // 级联选择器变化事件，如果集群发生变化，则重置名称空间为默认值
   const onOptionChange = (value) => {
     if (value && value.length === 2) {
       localStorage.setItem('environment', value[0]);
@@ -329,12 +326,36 @@ const AdminLayout = () => {
   // 级联选择器搜索过滤函数
   const optionFilter = (inputValue, path) => path.some((option) => option.label.toLowerCase().includes(inputValue.toLowerCase()));
 
+  // 初始化 namespace 状态，直接从 localStorage 读取，如果不存在则使用默认值
+  const [namespace, setNamespace] = useState(getLocalStorageNamespace);
+
+  // 只有在用户主动切换集群时才重置 namespace，初始化时不触发
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    setLocalStorageNamespace(defaultNamespace);
+    setNamespace(defaultNamespace);
+  }, [cascaderValue]);
+
+  // namespace 变化时保存到 localStorage
+  const onNamespaceChange = (value) => {
+    const newValue = value || defaultNamespace;
+    setLocalStorageNamespace(newValue);
+    setNamespace(newValue);
+  };
+
   return (
     <Layout>
       <Header className="dk-header">
-        <Space size="large">
-          <img src={LogoImage} alt="logo" className="dk-logo" />
-          <Cascader style={{ width: '200px' }} options={optionData} onChange={onOptionChange} placeholder="选择环境/集群" showSearch={{ optionFilter }} value={cascaderValue} />
+        <Space size="small">
+          <div style={{width: "170px", marginRight: "10px"}}>
+            <img src={LogoImage} alt="logo" className="dk-logo" />
+          </div>
+          <Cascader style={{ width: '200px' }} options={environmentAndClusterOptionData} onChange={onOptionChange} placeholder="选择环境/集群" showSearch={{ optionFilter }} value={cascaderValue} />
+          <Select options={namespaceOptionData} style={{ width: '200px' }} placeholder="选择命名空间" showSearch value={namespace} onChange={onNamespaceChange} />
+          <Input placeholder="全局搜索" prefix={<SearchOutlined />} variant="filled" style={{ width: '300px' }} />
         </Space>
         <Dropdown className="dk-dropdown-user" popupRender={dropdownUserInfoPopupRender}>
           <Badge size="small" count={GenerateGenderBadge(1)} offset={[-5, 22]}>

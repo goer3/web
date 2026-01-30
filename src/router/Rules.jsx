@@ -26,18 +26,37 @@ export const Rules = [
             element: RouterLazyLoad(React.lazy(() => import('@/page/kubernetes/overview/Overview.jsx')))
           },
           {
+            path: '/kubernetes/node',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/kubernetes/overview/Overview.jsx')))
+          },
+          {
+            path: '/kubernetes/namespace',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/kubernetes/overview/Overview.jsx')))
+          },
+          {
             path: '/kubernetes/pod',
             element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
           },
           {
             path: '/kubernetes/workload',
-            children: [
-              {
-                path: '/kubernetes/workload/deployment',
-                element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
-              }
-            ]
-          }
+            element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
+          },
+          {
+            path: '/kubernetes/service',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
+          },
+          {
+            path: '/kubernetes/ingress',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
+          },
+          {
+            path: '/kubernetes/configmap-and-secret',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
+          },
+          {
+            path: '/kubernetes/storage',
+            element: RouterLazyLoad(React.lazy(() => import('@/page/dashboard/Dashboard.jsx')))
+          },
         ]
       },
       {
