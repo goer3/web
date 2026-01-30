@@ -6,7 +6,7 @@ import { ManOutlined, QuestionOutlined, WomanOutlined } from '@ant-design/icons'
 // 返回：标签组件
 const GenerateTag = (value, map, options = {}) => {
   const {
-    bordered = false,
+    variant = 'filled',
     size = 'small',
     defaultKey = 'default',
     textKey = 'text',
@@ -18,7 +18,7 @@ const GenerateTag = (value, map, options = {}) => {
   const color = config[colorKey] || 'default';
 
   return (
-    <Tag bordered={bordered} size={size} color={color}>
+    <Tag variant={variant} size={size} color={color}>
       {text}
     </Tag>
   );

@@ -263,7 +263,21 @@ const SystemRole = () => {
   const copyRoleFormItems = [
     { label: '复制角色ID', name: 'copyId', type: 'input', disabled: true, hidden: false, rules: [{ required: true, message: '请输入角色ID' }] },
     { label: '复制角色名称', name: 'copyName', type: 'input', disabled: true, rules: [{ required: true, message: '请输入角色名称' }] },
-    ...addRoleFormItems
+    ...addRoleFormItems,
+    { label: '复制权限', 
+      name: 'copyPermissions', 
+      type: 'select', 
+      allowClear: true,
+      showSearch: true,
+      placeholder: '请选择需要复制的权限',
+      mode: 'multiple',
+      options: [
+        { label: '全部权限', value: 0 },
+        { label: '菜单权限', value: 1 },
+        { label: '接口权限', value: 2 },
+        { label: '特殊权限', value: 3 }
+      ]
+    }
   ];
 
   // 生成复制角色表单组件
@@ -698,7 +712,7 @@ const SystemRole = () => {
         open={menuDrawerVisible}
         onClose={() => setMenuDrawerVisible(false)}
         maskClosable={false}
-        width={600}
+        size={600}
         footer={
           <Button type="primary" icon={<SaveOutlined />}>
             保存菜单授权
@@ -714,7 +728,7 @@ const SystemRole = () => {
         open={apiDrawerVisible}
         onClose={() => setApiDrawerVisible(false)}
         maskClosable={false}
-        width={800}
+        size={800}
         footer={
           <Space>
             <Button danger icon={<SaveOutlined />} onClick={() => {}}>
@@ -761,7 +775,7 @@ const SystemRole = () => {
       </Drawer>
 
       {/* 角色用户 */}
-      <Drawer title="角色用户（超级管理员）" open={roleUserDrawerVisible} onClose={() => setRoleUserDrawerVisible(false)} maskClosable={false} width={600}>
+      <Drawer title="角色用户（超级管理员）" open={roleUserDrawerVisible} onClose={() => setRoleUserDrawerVisible(false)} maskClosable={false} size={600}>
         <div className="dk-page-actions">
           <div className="dk-page-actions-left">
             <Space size={10}>
