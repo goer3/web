@@ -70,7 +70,7 @@ const methodMap = {
 
 // 生成状态标签
 const GenerateStatusTag = (status) => {
-  return GenerateTag(status, statusMap, { size: 'small' });
+  return GenerateTag(status, statusMap);
 };
 
 // 生成请求方式标签

@@ -23,7 +23,7 @@ const FormItemComponentType = {
 };
 
 // 传入字段属性，返回 Form.Item 组件
-const FormItem = (props) => {
+const GenerateFormItem = (props) => {
   return (
     <Form.Item 
       key={props?.name} 
@@ -37,4 +37,4 @@ const FormItem = (props) => {
   );
 };
 
-export default FormItem;
+export default GenerateFormItem;

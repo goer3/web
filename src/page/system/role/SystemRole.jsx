@@ -24,7 +24,7 @@ import {
   CopyOutlined
 } from '@ant-design/icons';
 import { useState } from 'react';
-import FormItem from '@/components/Form';
+import GenerateFormItem from '@/components/Form';
 import { GenerateGenderIcon, GenerateMethodTag, GenerateStatusTag } from '@/components/Tag';
 import { GetTreeAllKeys, GetTreeNodeChildrenKeys } from '@/components/Tree';
 
@@ -99,7 +99,7 @@ const SystemRole = () => {
     },
     { label: '关键字3', name: 'keyword3', type: 'textarea', allowClear: true, rows: 1, placeholder: '请输入内容' },
     { label: '关键字4', name: 'keyword4', type: 'password', allowClear: true, placeholder: '请输入密码' },
-    { label: '关键字6', name: 'keyword6', type: 'number', addonAfter: '元', addonBefore: '￥', width: '100%', placeholder: '请输入数字' },
+    { label: '关键字6', name: 'keyword6', type: 'number', prefix: '￥', suffix: "RMB", width: '100%', placeholder: '请输入数字' },
     { label: '关键字7', name: 'keyword7', type: 'datePicker', allowClear: true, width: '100%', placeholder: '请选择日期' },
     { label: '关键字8', name: 'keyword8', type: 'timePicker', allowClear: true, width: '100%', placeholder: '请选择时间' },
     { label: '关键字9', name: 'keyword9', type: 'treeSelect', allowClear: true, treeDefaultExpandAll: true, placeholder: '请选择树形选择', treeData: treeSelectData }
@@ -109,7 +109,7 @@ const SystemRole = () => {
   const generateSearchFormItemsComponents = () => {
     return searchFormItems.slice(0, searchFormExpand ? searchFormItems.length : searchFormExpandLimit).map((field) => (
       <Col span={6} key={field?.name}>
-        {FormItem(field)}
+        {GenerateFormItem(field)}
       </Col>
     ));
   };
@@ -248,7 +248,7 @@ const SystemRole = () => {
 
   // 生成添加角色表单组件
   const generateAddRoleFormItemsComponents = () => {
-    return addRoleFormItems.map((field) => FormItem(field));
+    return addRoleFormItems.map((field) => GenerateFormItem(field));
   };
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,16 +261,16 @@ const SystemRole = () => {
 
   // 复制角色字段
   const copyRoleFormItems = [
-    { label: '复制角色ID', name: 'copyId', type: 'input', disabled: true, hidden: false, rules: [{ required: true, message: '请输入角色ID' }] },
+    { label: '复制角色ID', name: 'copyId', type: 'input', disabled: true, hidden: true, rules: [{ required: true, message: '请输入角色ID' }] },
     { label: '复制角色名称', name: 'copyName', type: 'input', disabled: true, rules: [{ required: true, message: '请输入角色名称' }] },
     ...addRoleFormItems,
     { label: '复制权限', 
       name: 'copyPermissions', 
       type: 'select', 
+      mode: 'multiple',
       allowClear: true,
       showSearch: true,
       placeholder: '请选择需要复制的权限',
-      mode: 'multiple',
       options: [
         { label: '全部权限', value: 0 },
         { label: '菜单权限', value: 1 },
@@ -282,7 +282,7 @@ const SystemRole = () => {
 
   // 生成复制角色表单组件
   const generateCopyRoleFormItemsComponents = () => {
-    return copyRoleFormItems.map((field) => FormItem(field));
+    return copyRoleFormItems.map((field) => GenerateFormItem(field));
   };
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
